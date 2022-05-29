@@ -1,9 +1,19 @@
 package ajuda;
 
-public class Ajuda {
+import regiao.Regiao;
 
-	public Ajuda() {
-		// TODO Auto-generated constructor stub
+public abstract class Ajuda {
+	
+	protected Regiao regiao ;
+	
+	public Ajuda(Regiao r) {
+		this.regiao = r;
 	}
+	
+	public Ajuda() {
+	}
+	
+	public abstract String getNome();
+	
 
 }

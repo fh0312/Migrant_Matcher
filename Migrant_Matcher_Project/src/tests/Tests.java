@@ -11,8 +11,8 @@ class Tests {
 	@Test
 	void testPass() {
 		Migrante m1 = new Migrante("Antonio",112);
-		Migrante m2 = new Migrante (4);
-		assertEquals("Antonio",m1.getName());
+		//Migrante m2 = new Migrante (4);
+		assertEquals("Antonio",m1.getNome());
 		assertEquals(112,m1.getTel());
 //		assertEquals("Joao",m2.getName());
 //		assertEquals(111,m2.getTel());

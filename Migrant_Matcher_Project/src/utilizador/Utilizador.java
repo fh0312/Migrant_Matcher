@@ -6,5 +6,7 @@ public abstract class Utilizador {
 	public Utilizador(int tel) {
 		this.tel = tel;
 	}
-	
+	public int getTel() {
+		return this.tel; 
+	}
 }
