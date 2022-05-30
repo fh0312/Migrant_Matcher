@@ -3,6 +3,9 @@ package ajuda;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Stream;
+
+import regiao.Regiao;
 
 import regiao.Regiao;
 
@@ -44,8 +47,21 @@ private HashMap<String,List<Ajuda>> ajudasDisponiveis;
 		}
 		return ajudas;
 	}
+<<<<<<< Updated upstream
 	public String getAjudasPorRegiao(Regiao r){
 		
 		return null ;
 	}
+=======
+	public List<Ajuda> getAjudasPorRegiao(Regiao r){
+		
+		Stream stream = this.getAjudas().stream()
+				.filter(a -> a.getClass().equals(Alojamento.class))
+				.filter(a -> (a.regiao).equals(r))
+				;
+		
+		return getAjudas() ;
+	}
+
+>>>>>>> Stashed changes
 }
