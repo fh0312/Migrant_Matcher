@@ -6,6 +6,7 @@ import java.util.List;
 
 public class CatalogoAjudas {
 	
+	
 	private HashMap<String,List<Ajuda>> ajudasDisponiveis;
 	
 	public CatalogoAjudas() {
