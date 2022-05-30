@@ -1,14 +1,25 @@
 package handlers;
 
-import ajuda.Item;
+import java.util.Scanner;
+
 import handlers.criaAjuda.CriaAjuda;
+import regiao.CatalogoRegioes;
 
 public class AdcionarAjudaHandler {
-	private CriaAjuda cA;
-
+	public CriaAjuda cA;
+	private CatalogoRegioes cR;
 	public AdcionarAjudaHandler() {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Indique o tipo de ajuda que deseja fornecer:");
+		String input = sc.next();
+		try{
+			this.cA = new CriaAjuda(Integer.parseInt(input),cR);
+		}
+		catch(NumberFormatException e) {
+			this.cA = new CriaAjuda(input,cR);
+		}
+
 		
-		this.cA = new CriaAjuda();
 	}
 	
 	

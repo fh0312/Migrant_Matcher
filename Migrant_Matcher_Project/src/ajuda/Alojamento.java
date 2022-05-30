@@ -23,6 +23,6 @@ public class Alojamento extends Ajuda {
 	}
 	@Override
 	public String toString() {
-		return ("Alojamento para " + maxPessoas + "pessoas na região de " + this.regiao.getNome().toUpperCase());
+		return ("Alojamento para " + maxPessoas + " pessoas na região de " + this.regiao.getNome().toUpperCase());
 	}
 }

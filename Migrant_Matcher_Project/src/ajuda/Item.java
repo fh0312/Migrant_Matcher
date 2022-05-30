@@ -12,5 +12,10 @@ public class Item extends Ajuda{
 	public String getNome() {
 		return this.itemDesc;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Item: " + itemDesc;
+		
+	}
 }
