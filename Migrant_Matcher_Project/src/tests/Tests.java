@@ -8,12 +8,15 @@ import ajuda.Ajuda;
 import ajuda.Alojamento;
 import ajuda.CatalogoAjudas;
 import ajuda.Item;
+import handlers.criaAjuda.CriaAjuda;
 import regiao.CatalogoRegioes;
 import regiao.Regiao;
 
 class Tests {
+	
+	
 
-	@Test
+	//@Test
 	void testRegioes() {
 		Regiao r1 = new Regiao("Viseu");
 		Regiao r2 = new Regiao("Lisboa");
@@ -23,12 +26,9 @@ class Tests {
 		for(Regiao r : catR.getRegioes()) {
 			System.out.println(r.getNome());
 		}
-		System.out.println("Regiao r2 = "+catR.getRegiao(r2).getNome());
-		assertEquals(catR.getRegiao(r1), r1);
-		assertEquals(catR.getRegiao(r2), r2);
 	}
 	
-	@Test
+	//@Test
 	void testAjudas() {
 		Regiao viseu = new Regiao("Viseu");
 		Regiao lisboa = new Regiao("Lisboa");
@@ -69,7 +69,47 @@ class Tests {
 		}
 		
 	}
+	@Test
+	public void testCriaAjuda() {
+		Regiao r1 = new Regiao("Viseu");
+		Regiao r2 = new Regiao("Lisboa");
+		Regiao r3 = new Regiao("Porto");
+		Regiao r4 = new Regiao("Braga");
+		CatalogoRegioes catR = new CatalogoRegioes();
+		catR.adicionaRegiao(r1);
+		catR.adicionaRegiao(r2);
+		catR.adicionaRegiao(r3);
+		catR.adicionaRegiao(r4);
+		
+		CriaAjuda cAjuda = new CriaAjuda("brinquedo",catR);
+		CriaAjuda cAjuda2 = new CriaAjuda(3,catR);
+		System.out.println(cAjuda.getAjuda().getNome());
+		System.out.println(cAjuda2.getAjuda().getNome());
+		assertEquals("true","true");
 
+	}
 
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

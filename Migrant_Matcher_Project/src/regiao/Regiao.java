@@ -30,5 +30,10 @@ public class Regiao {
 	public String getNome() {
 		return this.nome;
 	}
-
+	
+	@Override
+	public String toString() {
+		return nome.toUpperCase();
+		
+	}
 }

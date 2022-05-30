@@ -4,9 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import regiao.Regiao;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import regiao.Regiao;
+
 public class CatalogoAjudas {
-	
-	private HashMap<String,List<Ajuda>> ajudasDisponiveis;
+private HashMap<String,List<Ajuda>> ajudasDisponiveis;
 	
 	public CatalogoAjudas() {
 		this.ajudasDisponiveis = new HashMap<>();
@@ -37,5 +44,8 @@ public class CatalogoAjudas {
 		}
 		return ajudas;
 	}
-
+	public String getAjudasPorRegiao(Regiao r){
+		
+		return null ;
+	}
 }

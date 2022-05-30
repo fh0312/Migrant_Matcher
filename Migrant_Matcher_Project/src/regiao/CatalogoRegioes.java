@@ -13,18 +13,27 @@ public class CatalogoRegioes {
 	}
 	
 	public void adicionaRegiao(Regiao r) {
-		this.regioesDisponiveis.put(r.getNome(), r);
+		this.regioesDisponiveis.put(r.getNome().toLowerCase(), r);
 	}
 	
 	public void removeRegiao(Regiao r) {
-		this.regioesDisponiveis.remove(r.getNome());
+		this.regioesDisponiveis.remove(r.getNome().toLowerCase());
 	}
 	
-	public Regiao getRegiao(Regiao r) {
-		return this.regioesDisponiveis.get(r.getNome());
+	public Regiao getRegiao(String nome) {
+		return this.regioesDisponiveis.get(nome);
 	}
 	public List<Regiao> getRegioes(){
 		return new ArrayList<>(this.regioesDisponiveis.values());
 	}
-
+	
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+		result.append("\nLista de regioes disponiveis:\n");
+		for(Regiao r : this.getRegioes()) {
+			result.append("\t" + r.toString() + "\n");
+		}
+		return result.toString();
+	}
 }
