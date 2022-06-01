@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import ajuda.CatalogoAjudas;
-import ajuda.sms.AdaptadorPidgeonSMS;
-import ajuda.sms.AdaptadorTelegramSMS;
 import ajuda.sms.EnviadoresSMS;
+import ajuda.sms.plugins.AdaptadorPidgeonSMS;
+import ajuda.sms.plugins.AdaptadorTelegramSMS;
+import configuration.MinhaConfig;
 import handlers.ProcurarAjudaHandler;
 import handlers.RegistarAjudaHandler;
 import regiao.CatalogoRegioes;
@@ -33,13 +34,13 @@ public class MigrantMatcher {
 	}
                                                                                                                                                                                 
 	private void carregarPlugins() {
-//		List<EnviadoresSMS> lista = MinhaConfig.getPropertyAsListOfTypes("plugins");
-//		for (EnviadoresSMS p : lista) {
-//			pluginsSms.add(p);
-//		}
+		List<EnviadoresSMS> lista = MinhaConfig.getPropertyAsListOfTypes("plugins");
+		for (EnviadoresSMS p : lista) {
+			pluginsSms.add(p);
+		}
 //		pluginsSms.add(new SemSMS());
-		pluginsSms.add(AdaptadorTelegramSMS.class);
-		pluginsSms.add(AdaptadorPidgeonSMS.class);
+		//pluginsSms.add(AdaptadorTelegramSMS.class);
+		//pluginsSms.add(AdaptadorPidgeonSMS.class);
 		
 	}
 

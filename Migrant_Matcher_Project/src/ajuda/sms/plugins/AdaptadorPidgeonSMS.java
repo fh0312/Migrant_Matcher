@@ -1,4 +1,6 @@
-package ajuda.sms;
+package ajuda.sms.plugins;
+
+import ajuda.sms.EnviadoresSMS;
 
 public class AdaptadorPidgeonSMS implements EnviadoresSMS {
 
