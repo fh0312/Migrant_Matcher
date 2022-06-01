@@ -1,9 +1,12 @@
 package handlers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import ajuda.CatalogoAjudas;
 import ajuda.sms.ConfirmaAjuda;
+import ajuda.sms.EnviadoresSMS;
 import handlers.criaAjuda.CriaAjuda;
 import regiao.CatalogoRegioes;
 import utilizador.Voluntario;
@@ -13,7 +16,8 @@ public class RegistarAjudaHandler {
 	private CatalogoRegioes catRegioes;
 	private Voluntario voluntario;
 	private CriaAjuda criaAjuda;
-	
+	Scanner sc = new Scanner(System.in);
+	private List<EnviadoresSMS> pluginsSms;
 	
 	public RegistarAjudaHandler(Voluntario v,CatalogoRegioes catR,CatalogoAjudas catA) {
 		this.voluntario = v;
@@ -22,10 +26,9 @@ public class RegistarAjudaHandler {
 	}
 	
 	public void novaAjuda() {
-		Scanner sc = new Scanner(System.in);
-		System.out.print("Indique o tipo de ajuda que deseja fornecer:");
+		System.out.println("Indique o tipo de ajuda que deseja fornecer:");
+		System.out.print("\n\t-> ");
 		String input = sc.next();
-		sc.close();
 		try{
 			this.criaAjuda = new CriaAjuda(Integer.parseInt(input),catRegioes);
 		}
@@ -34,10 +37,11 @@ public class RegistarAjudaHandler {
 		}
 	}
 	
-	public void adionarAjuda() {
-		ConfirmaAjuda confirm = new ConfirmaAjuda();
-		confirm.sendCod();
-		if(confirm.estahConfirmado()) {
+	public void adicionarAjuda() {
+		ConfirmaAjuda confirm = new ConfirmaAjuda(pluginsSms);
+		confirm.sendCod(String.valueOf(voluntario.getTel()));
+		System.out.print("Indique o código que lhe foi enviado por sms:");
+		if(confirm.estahConfirmado(sc.next())) {
 			this.voluntario.addAjuda(this.criaAjuda.getAjuda());
 			this.catAjudas.adicionaAjuda(criaAjuda.getAjuda());
 		}
