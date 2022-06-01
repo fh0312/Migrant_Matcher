@@ -18,6 +18,7 @@ public class ConfirmaAjuda {
 		this.cod= String.format("%06d", codigo);
 		for( EnviadoresSMS sender : pluginsSms) {
 			sender.send(cod, num);
+			break;
 		}
 	}
 

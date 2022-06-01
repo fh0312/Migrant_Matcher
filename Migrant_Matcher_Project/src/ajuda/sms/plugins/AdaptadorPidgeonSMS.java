@@ -1,5 +1,7 @@
 package ajuda.sms.plugins;
 
+import com.pidgeonsmssender.sdk.PidgeonSMSSender;
+
 import ajuda.sms.EnviadoresSMS;
 
 public class AdaptadorPidgeonSMS implements EnviadoresSMS {
@@ -10,8 +12,8 @@ public class AdaptadorPidgeonSMS implements EnviadoresSMS {
 
 	@Override
 	public void send(String sms, String num) {
-		// TODO Auto-generated method stub
-
+		new PidgeonSMSSender().send(sms, num);
+		System.out.println(sms);
 	}
 
 }

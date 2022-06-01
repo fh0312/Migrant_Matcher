@@ -1,5 +1,6 @@
 package utilizador;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ajuda.Ajuda;
@@ -10,6 +11,7 @@ public class Voluntario extends Utilizador {
 	
 	public Voluntario(int tel) {
 		super(tel);
+		listaAjudasDadas = new ArrayList<>();
 	}
 	
 	public void addAjuda(Ajuda a) {

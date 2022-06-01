@@ -1,5 +1,7 @@
 package ajuda.sms.plugins;
 
+import com.telegramsms.TelegramSMSSender;
+
 import ajuda.sms.EnviadoresSMS;
 
 public class AdaptadorTelegramSMS implements EnviadoresSMS {
@@ -10,8 +12,11 @@ public class AdaptadorTelegramSMS implements EnviadoresSMS {
 
 	@Override
 	public void send(String sms, String num) {
-		// TODO Auto-generated method stub
-
+		TelegramSMSSender telegram = new TelegramSMSSender();
+		telegram.setNumber(num);
+		telegram.setText(sms);
+		System.out.println(sms);
+		telegram.send();
 	}
 
 }

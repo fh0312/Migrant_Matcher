@@ -28,9 +28,13 @@ public class MigrantMatcher {
 	
 	
 	public MigrantMatcher() {
+		this.catAjudas = new CatalogoAjudas();
+		this.catRegioes = new CatalogoRegioes();
+		this.catUsers = new CatalogoUtilizadores();
 		System.out.println(("\t\tBem vindo ao programa Migrant Matcher!\n").toUpperCase());
 		carregarPlugins();
 		help();
+		init(sc.next());
 	}
                                                                                                                                                                                 
 	private void carregarPlugins() {
@@ -48,22 +52,22 @@ public class MigrantMatcher {
 		System.out.println(" - Para procurar uma ajuda: indique o seu nome");
 		System.out.println(" - Para fazer uma doação: indique o seu número de telefone");
 		System.out.print("\n\t-> ");
-		init(sc.next());
 	}
 	
 	private void init(String user) {
 		try{
 			fazerDoacao(user);
+			System.out.println("Obrigado !");
 		}
 		catch(NumberFormatException e) {
-			
+			e.printStackTrace();
 		}
 	}
 	
 	private void fazerDoacao(String user) throws NumberFormatException {
 		this.u = new Voluntario(Integer.parseInt(user));
 		RegistarAjudaHandler registaAjuda= new RegistarAjudaHandler
-				((Voluntario) this.u, catRegioes,catAjudas);
+				((Voluntario) this.u, catRegioes,catAjudas,pluginsSms);
 		registaAjuda.novaAjuda();
 		System.out.println("Deseja confirmar a sua doação?");
 		System.out.print("\n\t-> ");

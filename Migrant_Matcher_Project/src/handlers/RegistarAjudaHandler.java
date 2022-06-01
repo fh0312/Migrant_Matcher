@@ -19,10 +19,11 @@ public class RegistarAjudaHandler {
 	Scanner sc = new Scanner(System.in);
 	private List<EnviadoresSMS> pluginsSms;
 	
-	public RegistarAjudaHandler(Voluntario v,CatalogoRegioes catR,CatalogoAjudas catA) {
+	public RegistarAjudaHandler(Voluntario v,CatalogoRegioes catR,CatalogoAjudas catA,List<EnviadoresSMS> plugins) {
 		this.voluntario = v;
 		this.catRegioes = catR;	
 		this.catAjudas= catA;
+		this.pluginsSms = plugins;
 	}
 	
 	public void novaAjuda() {
@@ -40,12 +41,23 @@ public class RegistarAjudaHandler {
 	public void adicionarAjuda() {
 		ConfirmaAjuda confirm = new ConfirmaAjuda(pluginsSms);
 		confirm.sendCod(String.valueOf(voluntario.getTel()));
-		System.out.print("Indique o código que lhe foi enviado por sms:");
+		System.out.println("Indique o código que lhe foi enviado por sms:");
+		confirma(confirm);
+
+	}
+
+	private void confirma(ConfirmaAjuda confirm) {
+		System.out.print("\n\t-> ");
 		if(confirm.estahConfirmado(sc.next())) {
 			this.voluntario.addAjuda(this.criaAjuda.getAjuda());
 			this.catAjudas.adicionaAjuda(criaAjuda.getAjuda());
 		}
-
+		else {
+			System.out.println("Código errado! Porfavor tente novamente.");
+			confirma(confirm);
+		}
+		
+		
 	}
 	
 	
