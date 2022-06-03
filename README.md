@@ -12,7 +12,7 @@ Manuel Cardoso - FC56274
 
 Migrant Matcher:
 
---info--
+Para iniciar o MigrantMatcher correr a Main.java e responder na Scanner que for indicado na Main.
 
 
 
