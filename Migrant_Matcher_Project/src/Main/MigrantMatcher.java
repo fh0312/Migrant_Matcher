@@ -22,21 +22,29 @@ public class MigrantMatcher {
 	private CatalogoRegioes catRegioes;
 	private CatalogoAjudas catAjudas;
 	private CatalogoUtilizadores catUsers;
-	private List<EnviadoresSMS> pluginsSms = new ArrayList<EnviadoresSMS>();
-	private Scanner sc = new Scanner(System.in);
+	private List<EnviadoresSMS> pluginsSms ;
+	private Scanner sc;
 	
 	
 	
-	public MigrantMatcher(String tiposAjuda) {
+	public MigrantMatcher(String tiposAjuda,Scanner scanner) {
 		this.catAjudas = new CatalogoAjudas(tiposAjuda.split(","));
 		this.catRegioes = new CatalogoRegioes();
 		this.catUsers = new CatalogoUtilizadores();
+		this.pluginsSms = new ArrayList<EnviadoresSMS>() ;
+		this.sc = scanner;
 		System.out.println(("\n\tBem vindo ao programa Migrant Matcher!\n").toUpperCase());
 		carregarPlugins();
 		help();
 		init(sc.next());
 	}
+	
+	public MigrantMatcher(String tiposAjuda) {
+		this(tiposAjuda,new Scanner(System.in));
+
+	}
                                                                                                                                                                                 
+
 	private void carregarPlugins() {
 		List<EnviadoresSMS> lista = MinhaConfig.getPropertyAsListOfTypes("plugins");
 		for (EnviadoresSMS p : lista) {
