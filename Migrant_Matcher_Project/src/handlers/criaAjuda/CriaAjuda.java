@@ -20,9 +20,10 @@ public class CriaAjuda {
 	public CriaAjuda(int numMax,CatalogoRegioes cat) {
 		this.catR = cat;
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Escolha uma região das seguintes apresentadas:");
+		System.out.print("Escolha uma região das seguintes apresentadas:\n");
 		System.out.println(catR.toString());
-		this.ajuda = new Alojamento(numMax,catR.getRegiao(sc.next()));
+		System.out.print("\t-> ");
+		this.ajuda = new Alojamento(numMax,catR.getRegiao(sc.next().toLowerCase()));
 	}
 	
 	public Ajuda getAjuda() {

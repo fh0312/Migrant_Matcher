@@ -1,6 +1,7 @@
 package ajuda;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
@@ -11,8 +12,10 @@ import regiao.Regiao;
 
 public class CatalogoAjudas {
 private HashMap<String,List<Ajuda>> ajudasDisponiveis;
+private String[] tiposDeAjuda ;
 	
-	public CatalogoAjudas() {
+	public CatalogoAjudas(String[] strings) {
+		this.tiposDeAjuda = strings;
 		this.ajudasDisponiveis = new HashMap<>();
 	}
 	
@@ -54,5 +57,9 @@ private HashMap<String,List<Ajuda>> ajudasDisponiveis;
 		Stream<Ajuda> stream = this.getAjudas().stream()
 				.filter(p);
 		return (List<Ajuda>) stream.collect(Collectors.toList());
+	}
+	
+	public List<String> getTiposAjuda(){
+		return Arrays.asList(this.tiposDeAjuda);
 	}
 }

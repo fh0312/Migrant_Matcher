@@ -6,6 +6,7 @@ public class Item extends Ajuda{
 
 	public Item(String itemDesc) {
 		super();
+		this.tipoAjuda = "Item";
 		this.itemDesc = itemDesc;
 	}
 	

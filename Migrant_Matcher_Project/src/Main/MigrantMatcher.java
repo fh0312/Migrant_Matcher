@@ -27,11 +27,11 @@ public class MigrantMatcher {
 	
 	
 	
-	public MigrantMatcher() {
-		this.catAjudas = new CatalogoAjudas();
+	public MigrantMatcher(String tiposAjuda) {
+		this.catAjudas = new CatalogoAjudas(tiposAjuda.split(","));
 		this.catRegioes = new CatalogoRegioes();
 		this.catUsers = new CatalogoUtilizadores();
-		System.out.println(("\t\tBem vindo ao programa Migrant Matcher!\n").toUpperCase());
+		System.out.println(("\n\tBem vindo ao programa Migrant Matcher!\n").toUpperCase());
 		carregarPlugins();
 		help();
 		init(sc.next());
@@ -42,15 +42,11 @@ public class MigrantMatcher {
 		for (EnviadoresSMS p : lista) {
 			pluginsSms.add(p);
 		}
-//		pluginsSms.add(new SemSMS());
-		//pluginsSms.add(AdaptadorTelegramSMS.class);
-		//pluginsSms.add(AdaptadorPidgeonSMS.class);
-		
 	}
 
 	private void help() {
-		System.out.println(" - Para procurar uma ajuda: indique o seu nome");
-		System.out.println(" - Para fazer uma doação: indique o seu número de telefone");
+		System.out.println(" - Para procurar uma ajuda:\t indique o seu nome");
+		System.out.println(" - Para fazer uma doação:\t indique o seu número de telefone");
 		System.out.print("\n\t-> ");
 	}
 	

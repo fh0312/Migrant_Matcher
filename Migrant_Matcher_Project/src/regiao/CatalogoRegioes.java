@@ -2,6 +2,7 @@ package regiao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 public class CatalogoRegioes {
@@ -10,6 +11,11 @@ public class CatalogoRegioes {
 	
 	public CatalogoRegioes() {
 		this.regioesDisponiveis = new HashMap<>();
+		String regioes = "lisboa,porto,setubal,braga,aveiro,faro,leiria,santarem,"
+				+ "coimbra,viseu,madeira,açores";
+		for(String s : regioes.split(",")) {
+			adicionaRegiao(new Regiao(s));
+		}
 	}
 	
 	public void adicionaRegiao(Regiao r) {
@@ -30,7 +36,6 @@ public class CatalogoRegioes {
 	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder();
-		result.append("\nLista de regioes disponiveis:\n");
 		for(Regiao r : this.getRegioes()) {
 			result.append("\t" + r.toString() + "\n");
 		}

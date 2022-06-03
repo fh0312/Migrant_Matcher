@@ -3,7 +3,8 @@ package Main;
 public class Main {
 
 	public static void main(String[] args) {
-		new MigrantMatcher();
+		String tiposAjuda = "alojamento,item";
+		new MigrantMatcher(tiposAjuda);
 
 	}
 

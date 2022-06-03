@@ -8,6 +8,7 @@ public class Alojamento extends Ajuda {
 	
 	public Alojamento(int numPessoas, Regiao regiao) {
 		super(regiao);
+		this.tipoAjuda="Alojamento";
 		this.maxPessoas = numPessoas;
 	}
 	public Regiao getRegiao() {

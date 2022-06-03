@@ -1,6 +1,5 @@
 package handlers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,17 +26,56 @@ public class RegistarAjudaHandler {
 	}
 	
 	public void novaAjuda() {
-		System.out.println("Indique o tipo de ajuda que deseja fornecer:");
+		System.out.println("Indique o tipo de ajuda que deseja fornecer:\n");
+		System.out.println("\t Tipos de Ajuda Disponiveis:");
+		for(String s : catAjudas.getTiposAjuda()) {
+			System.out.println("\t\t"+ s.toUpperCase());
+		}
 		System.out.print("\n\t-> ");
-		String input = sc.next();
-		try{
-			this.criaAjuda = new CriaAjuda(Integer.parseInt(input),catRegioes);
-		}
-		catch(NumberFormatException e) {
-			this.criaAjuda = new CriaAjuda(input,catRegioes);
-		}
+		
+		qualAjuda(sc.next());
+		
 	}
 	
+	private void qualAjuda(String input) {
+		switch(input.toLowerCase()) {
+			case "alojamento" :
+				criaAlojamento();
+				break;
+				
+			case "item" :
+				criaItem();
+				break;
+				
+			default :
+				System.out.println("\n\t\tO tipo de ajuda introduzido não está disponível. \n"
+						+ "\t\tPor favor tente novamente...");
+				System.out.print("\n\t\t-> ");
+				qualAjuda(sc.next());
+				break;
+		}	
+		
+	}
+
+	private void criaItem() {
+		System.out.println("Indique a descrição do item a ser oferecido:");
+		System.out.print("\n\t-> ");
+		this.criaAjuda = new CriaAjuda(sc.next(),catRegioes);
+	}
+
+	private void criaAlojamento() {
+		System.out.println("Indique o número máximo de ocupação do alojamento:");
+		System.out.print("\n\t-> ");
+		try {
+			this.criaAjuda = new CriaAjuda(Integer.parseInt(sc.next()),catRegioes);
+		}
+		catch(NumberFormatException e) {
+			System.out.println("Número não reconhecido. Por favor tente novamente...");
+			criaAlojamento();
+		}
+		
+	}
+
 	public void adicionarAjuda() {
 		ConfirmaAjuda confirm = new ConfirmaAjuda(pluginsSms);
 		confirm.sendCod(String.valueOf(voluntario.getTel()));
@@ -59,10 +97,4 @@ public class RegistarAjudaHandler {
 		
 		
 	}
-	
-	
-//	Scanner sc = new Scanner(System.in);
-//	System.out.println("Qual o tipo de ajuda que pretende oferecer ?");
-//	this.tipoDeAjuda=sc.next();
-//	
 }
