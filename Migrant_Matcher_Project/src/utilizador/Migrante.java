@@ -1,5 +1,6 @@
 package utilizador;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pedido_ajuda.PedidoAjuda;
@@ -15,6 +16,8 @@ public class Migrante extends Utilizador {
 	public Migrante(String nome, int tel) { //sem familia 
 		super(tel);
 		this.nome = nome;
+		this.lf = new ArrayList<>();
+		this.lp = new ArrayList<>();
 	}
 	
 	public int getTel() {
@@ -49,40 +52,7 @@ public class Migrante extends Utilizador {
 	}
 	
 	
-//	public Migrante(int numPessoas) { // com familia
-//		super(0);
-//		this.lf= new ArrayList<Familiar>();
-//		this.tel = getTelInput();
-//		this.nome = getNomeInput("cabeça de casal:");
-//		registaFamilia(numPessoas-1);
-//		sc.close();
-//	}
 
-//	private void registaFamilia(int n) {
-//		
-//		for(int i = 0;i<n;i++) {
-//			lf.add(new Familiar(getNomeInput("familiar:"),getTelInput()));
-//		}
-//	}
-
-//	private String getNomeInput(String tipo) {
-//		try {
-//		System.out.println("Insira o nome do " + tipo);
-//		String name = sc.next();
-//		return name;
-//		}
-//		catch(Exception e) {
-//			System.out.println("Número não reconhecido tente novamente!");
-//			return getNomeInput(tipo);	
-//		}
-//
-//	}
-//
-//	private int getTelInput() {
-//		System.out.println("Insira o numero de telemovel respetivo:");
-//		int tel =  sc.nextInt();
-//		return tel;
-//	}
 	
 
 	

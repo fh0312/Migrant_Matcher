@@ -62,4 +62,35 @@ private String[] tiposDeAjuda ;
 	public List<String> getTiposAjuda(){
 		return Arrays.asList(this.tiposDeAjuda);
 	}
+
+	public void imprimeAjudas(String ordem, Regiao r) {
+		List<Ajuda> list = new ArrayList<>();
+		if(ordem.toLowerCase().contains("data"))
+			list = getAjudasPorData(list);
+		else if(ordem.toLowerCase().contains("tipo"))
+			list = getAjudasPorTipo(list);
+		System.out.println("Lista de Ajudas Disponiveis:");
+		for(Ajuda a : list) {
+			System.out.println(a.getNome().toUpperCase());
+			}
+		}
+
+	private List<Ajuda> getAjudasPorData(List<Ajuda> list) {
+		for(Ajuda a : getAjudasEspecificas() {
+			list.add(a);
+		}
+		return null;
+	}
+
+	private List<Ajuda> getAjudasPorTipo(List<Ajuda> list) {
+		for(Ajuda a : getAjudasEspecificas(x -> x.tipoAjuda.equals("alojamento"))) {
+			list.add(a);
+		}
+		for(Ajuda a : getAjudasEspecificas(x -> x.tipoAjuda.equals("item"))) {
+			list.add(a);
+		}
+		return list;
+	}
+
+		
 }

@@ -10,9 +10,11 @@ import ajuda.sms.plugins.AdaptadorPidgeonSMS;
 import ajuda.sms.plugins.AdaptadorTelegramSMS;
 import configuration.MinhaConfig;
 import handlers.ProcurarAjudaHandler;
+import handlers.RegistaMigranteHandler;
 import handlers.RegistarAjudaHandler;
 import regiao.CatalogoRegioes;
 import utilizador.CatalogoUtilizadores;
+import utilizador.Migrante;
 import utilizador.Utilizador;
 import utilizador.Voluntario;
 
@@ -36,10 +38,10 @@ public class MigrantMatcher {
 		System.out.println(("\n\tBem vindo ao programa Migrant Matcher!\n").toUpperCase());
 		carregarPlugins();
 		help();
-		init(sc.next());
+		init(sc.next().toLowerCase().replaceAll("\\s+",""));
 	}
 	
-	public MigrantMatcher(String tiposAjuda) {
+	public MigrantMatcher(String tiposAjuda) { //default input
 		this(tiposAjuda,new Scanner(System.in));
 
 	}
@@ -53,51 +55,55 @@ public class MigrantMatcher {
 	}
 
 	private void help() {
-		System.out.println(" - Para procurar uma ajuda:\t indique o seu nome");
-		System.out.println(" - Para fazer uma doação:\t indique o seu número de telefone");
+		System.out.println(" - Para procurar uma ajuda:\t escreva migrante");
+		System.out.println(" - Para fazer uma doação:\t escreva voluntario");
 		System.out.print("\n\t-> ");
 	}
 	
 	private void init(String user) {
-		try{
-			fazerDoacao(user);
-			System.out.println("Obrigado !");
+		switch (user) {
+			case "migrante" : {
+				pedirAjuda();
+				break;
+			}
+			case "voluntario ": {
+				fazerDoacao(user);
+				break;
+			}	
 		}
-		catch(NumberFormatException e) {
-			e.printStackTrace();
-		}
+		//help();
+		System.out.println("Obrigado por usar o nosso sistema !");
 	}
 	
+	private void pedirAjuda() throws NumberFormatException {
+		
+		this.u = new RegistaMigranteHandler(this.sc).getMigrante();
+		ProcurarAjudaHandler procuraAjuda = new ProcurarAjudaHandler((Migrante) this.u,this.catRegioes,this.catAjudas,
+				this.pluginsSms,this.sc);
+		
+		
+	}
+
 	private void fazerDoacao(String user) throws NumberFormatException {
 		this.u = new Voluntario(Integer.parseInt(user));
-		RegistarAjudaHandler registaAjuda= new RegistarAjudaHandler
-				((Voluntario) this.u, catRegioes,catAjudas,pluginsSms);
+		RegistarAjudaHandler registaAjuda= new RegistarAjudaHandler ((Voluntario) this.u, this.catRegioes,
+				this.catAjudas,this.pluginsSms,this.sc);
 		registaAjuda.novaAjuda();
-		System.out.println("Deseja confirmar a sua doação?");
-		System.out.print("\n\t-> ");
-		if(sc.next().toLowerCase().equals("sim")) {
-			registaAjuda.adicionarAjuda();
-		}
-		else {
-			System.out.println("Pretende criar uma nova doação?");
-			if(sc.next().toLowerCase().equals("sim")) {
-				fazerDoacao(user);
-			}
-			else {
-				System.out.println("Obrigado por ter utilizado o programa MIGRANT MATCHER!");
-				System.exit(0);
-			}
-		}
+		registaAjuda.querConfirmar();
+		
 	}
-	
-	private void procurarAjuda(String User) {
-		System.out.println(" - Para fazer um registo individual: indique o seu numero de telemovel.");
-		System.out.println(" - Para fazer um registo coletivo: indique o número de pessoas do agregado familiar");
-		new ProcurarAjudaHandler();
-		 //TODO
-	}
+
 	
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

@@ -15,14 +15,16 @@ public class RegistarAjudaHandler {
 	private CatalogoRegioes catRegioes;
 	private Voluntario voluntario;
 	private CriaAjuda criaAjuda;
-	Scanner sc = new Scanner(System.in);
+	private Scanner sc ;
 	private List<EnviadoresSMS> pluginsSms;
 	
-	public RegistarAjudaHandler(Voluntario v,CatalogoRegioes catR,CatalogoAjudas catA,List<EnviadoresSMS> plugins) {
+	public RegistarAjudaHandler(Voluntario v,CatalogoRegioes catR,CatalogoAjudas catA,
+			List<EnviadoresSMS> plugins,Scanner scIn) {
 		this.voluntario = v;
 		this.catRegioes = catR;	
 		this.catAjudas= catA;
 		this.pluginsSms = plugins;
+		this.sc = scIn;
 	}
 	
 	public void novaAjuda() {
@@ -96,5 +98,36 @@ public class RegistarAjudaHandler {
 		}
 		
 		
+	}
+
+	public void querConfirmar() {
+		System.out.println("Deseja confirmar a sua doação?");
+		System.out.print("\n\t-> ");
+		if(sc.next().toLowerCase().equals("sim")) {
+			adicionarAjuda();
+		}
+		else {
+			System.out.println("Pretende criar uma nova doação?");
+			if(sc.next().toLowerCase().equals("sim")) {
+
+			}
+			else {
+				System.out.println("Obrigado por ter utilizado o programa MIGRANT MATCHER!");
+				System.exit(0);
+			}
+		}
+		
+	}
+	
+	private int getTelInput(String extra) {
+		try {
+			System.out.println("Indique o número de telémovel " + extra + ":");
+			System.out.print("\n\t-> ");
+			return Integer.parseInt(sc.next());
+		}
+		catch (NumberFormatException e) {
+			System.out.println("Número de telemovel inválido. \nPor favor tente novamente...");
+			return getTelInput(extra);
+		}
 	}
 }

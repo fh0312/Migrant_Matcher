@@ -27,7 +27,7 @@ public class CatalogoRegioes {
 	}
 	
 	public Regiao getRegiao(String nome) {
-		return this.regioesDisponiveis.get(nome);
+		return this.regioesDisponiveis.get(nome.toLowerCase());
 	}
 	public List<Regiao> getRegioes(){
 		return new ArrayList<>(this.regioesDisponiveis.values());
