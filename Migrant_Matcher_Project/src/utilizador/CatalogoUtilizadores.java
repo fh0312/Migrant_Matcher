@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import regiao.Regiao;
-
 public class CatalogoUtilizadores {
 
 	private HashMap<Integer,Utilizador> usersRegistados;

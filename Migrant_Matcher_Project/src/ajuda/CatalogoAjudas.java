@@ -2,6 +2,7 @@ package ajuda;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
@@ -63,12 +64,15 @@ private String[] tiposDeAjuda ;
 		return Arrays.asList(this.tiposDeAjuda);
 	}
 
-	public void imprimeAjudas(String ordem, Regiao r) {
-		List<Ajuda> list = new ArrayList<>();
+	public void imprimeAjudas(String ordem) {
+		List<Ajuda> list = new ArrayList<Ajuda>();
+		for(Ajuda a : getAjudas()) {
+			list.add(a);
+		}
 		if(ordem.toLowerCase().contains("data"))
 			list = getAjudasPorData(list);
 		else if(ordem.toLowerCase().contains("tipo"))
-			list = getAjudasPorTipo(list);
+			list = getAjudasPorTipo(new ArrayList<>());
 		System.out.println("Lista de Ajudas Disponiveis:");
 		for(Ajuda a : list) {
 			System.out.println(a.getNome().toUpperCase());
@@ -76,17 +80,16 @@ private String[] tiposDeAjuda ;
 		}
 
 	private List<Ajuda> getAjudasPorData(List<Ajuda> list) {
-		for(Ajuda a : getAjudasEspecificas() {
-			list.add(a);
-		}
-		return null;
+		list.sort((x,y) -> x.getDataCriacao().compareTo(y.getDataCriacao()));
+		return list;
 	}
 
 	private List<Ajuda> getAjudasPorTipo(List<Ajuda> list) {
-		for(Ajuda a : getAjudasEspecificas(x -> x.tipoAjuda.equals("alojamento"))) {
+		Collections.shuffle(list);
+		for(Ajuda a : getAjudasEspecificas(x -> x.tipoAjuda.equals("Alojamento"))) {
 			list.add(a);
 		}
-		for(Ajuda a : getAjudasEspecificas(x -> x.tipoAjuda.equals("item"))) {
+		for(Ajuda a : getAjudasEspecificas(x -> x.tipoAjuda.equals("Item"))) {
 			list.add(a);
 		}
 		return list;

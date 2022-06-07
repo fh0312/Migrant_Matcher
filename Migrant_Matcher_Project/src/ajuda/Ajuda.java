@@ -21,6 +21,7 @@ public abstract class Ajuda {
 	}
 
 	public Ajuda() {
+		this.dataCriacao = new Date();
 	}
 	
 	public abstract String getNome();

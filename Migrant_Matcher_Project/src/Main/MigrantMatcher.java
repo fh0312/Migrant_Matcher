@@ -6,8 +6,6 @@ import java.util.Scanner;
 
 import ajuda.CatalogoAjudas;
 import ajuda.sms.EnviadoresSMS;
-import ajuda.sms.plugins.AdaptadorPidgeonSMS;
-import ajuda.sms.plugins.AdaptadorTelegramSMS;
 import configuration.MinhaConfig;
 import handlers.ProcurarAjudaHandler;
 import handlers.RegistaMigranteHandler;
@@ -78,8 +76,10 @@ public class MigrantMatcher {
 	private void pedirAjuda() throws NumberFormatException {
 		
 		this.u = new RegistaMigranteHandler(this.sc).getMigrante();
-		ProcurarAjudaHandler procuraAjuda = new ProcurarAjudaHandler((Migrante) this.u,this.catRegioes,this.catAjudas,
-				this.pluginsSms,this.sc);
+		ProcurarAjudaHandler procuraAjuda = new ProcurarAjudaHandler((Migrante) this.u,
+				this.catRegioes,this.catAjudas,this.pluginsSms,this.sc);
+		procuraAjuda.localizacao();
+		
 		
 		
 	}

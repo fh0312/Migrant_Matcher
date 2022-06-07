@@ -7,12 +7,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import ajuda.Ajuda;
-import ajuda.Alojamento;
-import ajuda.CatalogoAjudas;
-import ajuda.Item;
-import handlers.RegistarAjudaHandler;
-import handlers.criaAjuda.CriaAjuda;
 import regiao.CatalogoRegioes;
 import regiao.Regiao;
 
@@ -44,8 +38,8 @@ class Tests {
 		for(String r : list) {
 			catR.adicionaRegiao(new Regiao(r));
 		}
-		CriaAjuda cAjuda = new CriaAjuda("brinquedo",catR);
-		CriaAjuda cAjuda2 = new CriaAjuda(3,catR);
+		//CriaAjuda cAjuda = new CriaAjuda("brinquedo",catR);
+		//CriaAjuda cAjuda2 = new CriaAjuda(3,catR);
 		assertEquals("true","true");
 
 	}
