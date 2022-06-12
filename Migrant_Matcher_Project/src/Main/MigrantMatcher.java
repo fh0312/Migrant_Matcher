@@ -79,6 +79,7 @@ public class MigrantMatcher {
 		ProcurarAjudaHandler procuraAjuda = new ProcurarAjudaHandler((Migrante) this.u,
 				this.catRegioes,this.catAjudas,this.pluginsSms,this.sc);
 		procuraAjuda.localizacao();
+		procuraAjuda.escolheAjuda();
 		
 		
 		

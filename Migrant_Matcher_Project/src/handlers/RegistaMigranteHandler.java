@@ -18,7 +18,7 @@ public class RegistaMigranteHandler {
 		}
 		catch(NumberFormatException e) {
 			System.out.println(" Número de telemovel inválido! \nPor favor tente novamente...\n");
-			qualTipo();
+			new RegistaMigranteHandler(sc);
 		}
 	}
 

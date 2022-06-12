@@ -10,9 +10,8 @@ public class Main {
 		String tiposAjuda = "alojamento,item";
 		new MigrantMatcher(tiposAjuda); //usa o default (system.in)
 		//usaScanner(); //para os testes no ficheiro
-
 		
-
+		
 	}
 	
 	public static void usaScanner() {

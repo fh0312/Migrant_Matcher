@@ -7,6 +7,7 @@ import ajuda.Alojamento;
 import ajuda.CatalogoAjudas;
 import ajuda.Item;
 import ajuda.sms.EnviadoresSMS;
+import pedido_ajuda.PedidoAjuda;
 import regiao.CatalogoRegioes;
 import regiao.Regiao;
 import utilizador.Migrante;
@@ -18,7 +19,7 @@ public class ProcurarAjudaHandler {
 	private Migrante migrante;
 	private Regiao r = null ;
 	private Scanner sc;
-	//private List<EnviadoresSMS> pluginsSms;
+	private List<EnviadoresSMS> pluginsSms;
 	
 	public ProcurarAjudaHandler(Migrante m,CatalogoRegioes catR,CatalogoAjudas catA,
 			List<EnviadoresSMS> plugins,Scanner sc) {
@@ -35,26 +36,31 @@ public class ProcurarAjudaHandler {
 		this.catRegioes = catR;
 		this.migrante = m;
 		this.sc=sc;
-		//this.pluginsSms=plugins;
+		this.pluginsSms=plugins;
 	}
 	
 	public void localizacao() {
-		System.out.println(this.catRegioes.toString());
 		while (this.r == null) {
-			pergunta("Para onde se deseja mover?");
+			pergunta("\nPara onde se deseja mover?\n"+ this.catRegioes.toString());
 			this.r = catRegioes.getRegiao(sc.next());
-			if(r.equals(null))
+			if(r == null)
 				System.out.println("Regiao não encontrada. Por favor tente novamente...");
-			pergunta("Indique o método de ordenação, tipo ou data:");
-			this.catAjudas.imprimeAjudas(sc.next());
 		}
+	}
+	
+	public void escolheAjuda() {
+		pergunta("Indique o método de ordenação para a lista de "
+				+ "ajudas da regiao indicada, tipo ou data:");
+		System.out.println(this.catAjudas.imprimeAjudas(sc.next()));
+		pergunta("\nIndique a ajuda desejada:");
+		this.migrante.setPaCorrente(new PedidoAjuda(this.catAjudas));
 	}
 
 	
 
 	private void pergunta(String string) {
 		System.out.println(string);
-		System.out.print("\t-> \n");
+		System.out.print("\t-> ");
 	}
 
 	

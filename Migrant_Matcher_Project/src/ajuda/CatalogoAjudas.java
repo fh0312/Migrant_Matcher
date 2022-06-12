@@ -9,6 +9,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import ajuda.strategies.OrdenaPorDataStrategy;
+import ajuda.strategies.OrdenaPorTipoStrategy;
 import regiao.Regiao;
 
 public class CatalogoAjudas {
@@ -64,36 +66,37 @@ private String[] tiposDeAjuda ;
 		return Arrays.asList(this.tiposDeAjuda);
 	}
 
-	public void imprimeAjudas(String ordem) {
+	public String imprimeAjudas(String ordem) {
 		List<Ajuda> list = new ArrayList<Ajuda>();
-		for(Ajuda a : getAjudas()) {
-			list.add(a);
-		}
 		if(ordem.toLowerCase().contains("data"))
-			list = getAjudasPorData(list);
+			list = new OrdenaPorDataStrategy().ordena(this);
+		
 		else if(ordem.toLowerCase().contains("tipo"))
-			list = getAjudasPorTipo(new ArrayList<>());
-		System.out.println("Lista de Ajudas Disponiveis:");
+			list = new OrdenaPorTipoStrategy().ordena(this);
+		
+		StringBuilder result = new StringBuilder();
+		result.append("\nLista de Ajudas Disponiveis:\n");
 		for(Ajuda a : list) {
-			System.out.println(a.getNome().toUpperCase());
+			result.append(a.toString().toUpperCase()+"\n");
 			}
-		}
-
-	private List<Ajuda> getAjudasPorData(List<Ajuda> list) {
-		list.sort((x,y) -> x.getDataCriacao().compareTo(y.getDataCriacao()));
-		return list;
+		return result.toString();
 	}
 
-	private List<Ajuda> getAjudasPorTipo(List<Ajuda> list) {
-		Collections.shuffle(list);
-		for(Ajuda a : getAjudasEspecificas(x -> x.tipoAjuda.equals("Alojamento"))) {
-			list.add(a);
-		}
-		for(Ajuda a : getAjudasEspecificas(x -> x.tipoAjuda.equals("Item"))) {
-			list.add(a);
-		}
-		return list;
-	}
+//	private List<Ajuda> getAjudasPorData(List<Ajuda> list) {
+//		list.sort((x,y) -> x.getDataCriacao().compareTo(y.getDataCriacao()));
+//		return list;
+//	}
+//
+//	private List<Ajuda> getAjudasPorTipo(List<Ajuda> list) {
+//		Collections.shuffle(list);
+//		for(Ajuda a : getAjudasEspecificas(x -> x.tipoAjuda.equals("Alojamento"))) {
+//			list.add(a);
+//		}
+//		for(Ajuda a : getAjudasEspecificas(x -> x.tipoAjuda.equals("Item"))) {
+//			list.add(a);
+//		}
+//		return list;
+//	}
 
 		
 }
