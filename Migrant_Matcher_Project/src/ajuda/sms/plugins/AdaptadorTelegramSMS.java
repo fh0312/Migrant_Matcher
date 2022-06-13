@@ -15,7 +15,6 @@ public class AdaptadorTelegramSMS implements EnviadoresSMS {
 		TelegramSMSSender telegram = new TelegramSMSSender();
 		telegram.setNumber(num);
 		telegram.setText(sms);
-		System.out.println(sms);
 		telegram.send();
 	}
 

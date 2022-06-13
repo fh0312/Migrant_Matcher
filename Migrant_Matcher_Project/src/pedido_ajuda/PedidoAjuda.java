@@ -1,5 +1,6 @@
 package pedido_ajuda;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ajuda.Ajuda;
@@ -12,6 +13,7 @@ public class PedidoAjuda {
 	
 	public PedidoAjuda(CatalogoAjudas catA) {
 		this.catAjudas=catA;
+		this.ajudasPedidas = new ArrayList<Ajuda>();
 	}
 	
 	public void adicionaAjuda(Ajuda a) {
@@ -27,8 +29,6 @@ public class PedidoAjuda {
 			.forEach((a) -> {
 				this.catAjudas.removeAjuda(a);
 			});
-		confirmasms
-		
 	}
 	
 

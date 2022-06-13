@@ -55,6 +55,7 @@ public class MigrantMatcher {
 	private void help() {
 		System.out.println(" - Para procurar uma ajuda:\t escreva migrante");
 		System.out.println(" - Para fazer uma doação:\t escreva voluntario");
+		System.out.println(" - Para sair do programa:\t escreva sair");
 		System.out.print("\n\t-> ");
 	}
 	
@@ -64,13 +65,22 @@ public class MigrantMatcher {
 				pedirAjuda();
 				break;
 			}
-			case "voluntario ": {
+			case "voluntario": {
 				fazerDoacao(user);
 				break;
 			}	
+			case "sair" :{
+				System.out.println("\n\nObrigado por usar o nosso sistema !");
+				System.exit(0);
+			}
 		}
-		//help();
-		System.out.println("Obrigado por usar o nosso sistema !");
+		System.out.println("Deseja efetuar mais operações ?");
+		System.out.print("\n\t-> ");
+		if((sc.next().toLowerCase().split("\\s"))[0].equals("sim")) {
+			help();
+			init(sc.next());
+		}
+		else System.out.println("\n\nObrigado por usar o nosso sistema !");
 	}
 	
 	private void pedirAjuda() throws NumberFormatException {
@@ -79,7 +89,8 @@ public class MigrantMatcher {
 		ProcurarAjudaHandler procuraAjuda = new ProcurarAjudaHandler((Migrante) this.u,
 				this.catRegioes,this.catAjudas,this.pluginsSms,this.sc);
 		procuraAjuda.localizacao();
-		procuraAjuda.escolheAjuda();
+		procuraAjuda.escolheAjudas();
+		procuraAjuda.confirma();
 		
 		
 		
@@ -91,7 +102,6 @@ public class MigrantMatcher {
 				this.catAjudas,this.pluginsSms,this.sc);
 		registaAjuda.novaAjuda();
 		registaAjuda.querConfirmar();
-		
 	}
 
 	

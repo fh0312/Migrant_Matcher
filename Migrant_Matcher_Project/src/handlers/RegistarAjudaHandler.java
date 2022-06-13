@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import ajuda.CatalogoAjudas;
-import ajuda.sms.ConfirmaAjuda;
+import ajuda.sms.ConfirmaSms;
 import ajuda.sms.EnviadoresSMS;
 import handlers.criaAjuda.CriaAjuda;
 import regiao.CatalogoRegioes;
@@ -62,7 +62,7 @@ public class RegistarAjudaHandler {
 	private void criaItem() {
 		System.out.println("Indique a descrição do item a ser oferecido:");
 		System.out.print("\n\t-> ");
-		this.criaAjuda = new CriaAjuda(sc.next(),catRegioes);
+		this.criaAjuda = new CriaAjuda(sc.next(),catRegioes,this.voluntario);
 	}
 
 	private void criaAlojamento() {
@@ -79,14 +79,14 @@ public class RegistarAjudaHandler {
 	}
 
 	public void adicionarAjuda() {
-		ConfirmaAjuda confirm = new ConfirmaAjuda(pluginsSms);
+		ConfirmaSms confirm = new ConfirmaSms(pluginsSms);
 		confirm.sendCod(String.valueOf(voluntario.getTel()));
 		System.out.println("Indique o código que lhe foi enviado por sms:");
 		confirma(confirm);
 
 	}
 
-	private void confirma(ConfirmaAjuda confirm) {
+	private void confirma(ConfirmaSms confirm) {
 		System.out.print("\n\t-> ");
 		if(confirm.estahConfirmado(sc.next())) {
 			this.voluntario.addAjuda(this.criaAjuda.getAjuda());
@@ -117,17 +117,5 @@ public class RegistarAjudaHandler {
 			}
 		}
 		
-	}
-	
-	private int getTelInput(String extra) {
-		try {
-			System.out.println("Indique o número de telémovel " + extra + ":");
-			System.out.print("\n\t-> ");
-			return Integer.parseInt(sc.next());
-		}
-		catch (NumberFormatException e) {
-			System.out.println("Número de telemovel inválido. \nPor favor tente novamente...");
-			return getTelInput(extra);
-		}
 	}
 }

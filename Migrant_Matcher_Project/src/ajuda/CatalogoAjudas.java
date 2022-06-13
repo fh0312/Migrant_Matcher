@@ -2,7 +2,6 @@ package ajuda;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
@@ -35,8 +34,8 @@ private String[] tiposDeAjuda ;
 		}
 	}
 	
-	public Ajuda getAjuda(Ajuda a) {
-		return this.ajudasDisponiveis.get(a.getNome()).get(0);
+	public Ajuda getAjuda(String ajuda) {
+		return this.ajudasDisponiveis.get(ajuda).get(0);
 	}
 	public List<Ajuda> getAjudas(){
 		List<Ajuda> ajudas = new ArrayList<>();
@@ -66,18 +65,23 @@ private String[] tiposDeAjuda ;
 		return Arrays.asList(this.tiposDeAjuda);
 	}
 
-	public String imprimeAjudas(String ordem) {
-		List<Ajuda> list = new ArrayList<Ajuda>();
+	public List<Ajuda> getAjudasPorOrdem(String ordem) {
 		if(ordem.toLowerCase().contains("data"))
-			list = new OrdenaPorDataStrategy().ordena(this);
+			return new OrdenaPorDataStrategy().ordena(this);
 		
 		else if(ordem.toLowerCase().contains("tipo"))
-			list = new OrdenaPorTipoStrategy().ordena(this);
+			return new OrdenaPorTipoStrategy().ordena(this);
 		
+		return Arrays.asList();
+	}
+	
+	public String imprimeAjudasPorOrdem(List<Ajuda> list) {
 		StringBuilder result = new StringBuilder();
 		result.append("\nLista de Ajudas Disponiveis:\n");
+		int count = 0;
 		for(Ajuda a : list) {
-			result.append(a.toString().toUpperCase()+"\n");
+			result.append(count+" - "+a.toString().toUpperCase()+"\n");
+			count++;
 			}
 		return result.toString();
 	}

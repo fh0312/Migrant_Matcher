@@ -13,7 +13,6 @@ public class AdaptadorPidgeonSMS implements EnviadoresSMS {
 	@Override
 	public void send(String sms, String num) {
 		new PidgeonSMSSender().send(sms, num);
-		System.out.println(sms);
 	}
 
 }

@@ -1,13 +1,14 @@
 package ajuda;
 
 import regiao.Regiao;
+import utilizador.Voluntario;
 
 public class Alojamento extends Ajuda {
 	
 	private int maxPessoas;
 	
-	public Alojamento(int numPessoas, Regiao regiao) {
-		super(regiao);
+	public Alojamento(int numPessoas, Regiao regiao, Voluntario v) {
+		super(regiao,v);
 		this.tipoAjuda="Alojamento";
 		this.maxPessoas = numPessoas;
 	}

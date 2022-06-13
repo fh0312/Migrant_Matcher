@@ -3,12 +3,12 @@ package ajuda.sms;
 import java.util.List;
 import java.util.Random;
 
-public class ConfirmaAjuda {
+public class ConfirmaSms {
 
 	private List<EnviadoresSMS> pluginsSms;
 	private String cod;
 	
-	public ConfirmaAjuda(List<EnviadoresSMS> plugins) {
+	public ConfirmaSms(List<EnviadoresSMS> plugins) {
 		this.pluginsSms =plugins;
 	}
 
@@ -21,8 +21,8 @@ public class ConfirmaAjuda {
 		}
 	}
 
-	public boolean estahConfirmado(String codigoVolun) {
-		return codigoVolun.equals(cod);
+	public boolean estahConfirmado(String codigo) {
+		return codigo.equals(cod);
 	}
 	
 	

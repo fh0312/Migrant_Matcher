@@ -1,6 +1,5 @@
 package ajuda.strategies;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ajuda.Ajuda;
