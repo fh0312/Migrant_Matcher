@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import IO.SystemInStrategy;
 import ajuda.CatalogoAjudas;
 import ajuda.sms.EnviadoresSMS;
 import configuration.MinhaConfig;
@@ -23,6 +24,7 @@ public class MigrantMatcher {
 	private CatalogoAjudas catAjudas;
 	private CatalogoUtilizadores catUsers;
 	private List<EnviadoresSMS> pluginsSms ;
+	private InputOutput io;
 	private Scanner sc;
 	
 	
@@ -33,6 +35,7 @@ public class MigrantMatcher {
 		this.catUsers = new CatalogoUtilizadores();
 		this.pluginsSms = new ArrayList<EnviadoresSMS>() ;
 		this.sc = scanner;
+		this.io = new SystemInStrategy();
 		System.out.println(("\n\tBem vindo ao programa Migrant Matcher!\n").toUpperCase());
 		carregarPlugins();
 		help();

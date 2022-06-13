@@ -86,21 +86,5 @@ private String[] tiposDeAjuda ;
 		return result.toString();
 	}
 
-//	private List<Ajuda> getAjudasPorData(List<Ajuda> list) {
-//		list.sort((x,y) -> x.getDataCriacao().compareTo(y.getDataCriacao()));
-//		return list;
-//	}
-//
-//	private List<Ajuda> getAjudasPorTipo(List<Ajuda> list) {
-//		Collections.shuffle(list);
-//		for(Ajuda a : getAjudasEspecificas(x -> x.tipoAjuda.equals("Alojamento"))) {
-//			list.add(a);
-//		}
-//		for(Ajuda a : getAjudasEspecificas(x -> x.tipoAjuda.equals("Item"))) {
-//			list.add(a);
-//		}
-//		return list;
-//	}
-
 		
 }
