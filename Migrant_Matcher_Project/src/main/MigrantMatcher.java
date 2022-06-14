@@ -2,7 +2,6 @@ package main;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import ajuda.CatalogoAjudas;
 import ajuda.sms.EnviadoresSMS;
@@ -11,7 +10,6 @@ import handlers.ProcurarAjudaHandler;
 import handlers.RegistaMigranteHandler;
 import handlers.RegistarAjudaHandler;
 import io.InputOutput;
-import io.plugins.SystemInStrategy;
 import regiao.CatalogoRegioes;
 import utilizador.CatalogoUtilizadores;
 import utilizador.Migrante;
