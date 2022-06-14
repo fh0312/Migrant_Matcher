@@ -11,7 +11,7 @@ import handlers.ProcurarAjudaHandler;
 import handlers.RegistaMigranteHandler;
 import handlers.RegistarAjudaHandler;
 import io.InputOutput;
-import io.SystemInStrategy;
+import io.plugins.SystemInStrategy;
 import regiao.CatalogoRegioes;
 import utilizador.CatalogoUtilizadores;
 import utilizador.Migrante;
@@ -29,19 +29,14 @@ public class MigrantMatcher {
 	
 	
 	
-	public MigrantMatcher(InputOutput io) {
+	public MigrantMatcher() {
 		this.catAjudas = new CatalogoAjudas();
 		this.catRegioes = new CatalogoRegioes();
 		this.catUsers = new CatalogoUtilizadores();
-		this.pluginsSms = new ArrayList<EnviadoresSMS>() ;
-		this.io = io; 
+		this.pluginsSms = new ArrayList<EnviadoresSMS>() ; 
 		carregarPlugins();
 		this.io.escreve(("\n\tBem vindo ao programa Migrant Matcher!\n\n").toUpperCase());
 		iniciaSistema();
-	}
-	
-	public MigrantMatcher() { //default System.in and System.out
-		this(new SystemInStrategy());
 	}
                                                                                                                                                                                 
 
@@ -50,6 +45,8 @@ public class MigrantMatcher {
 		for (EnviadoresSMS p : lista) {
 			pluginsSms.add(p);
 		}
+		List<InputOutput> listaIO = MinhaConfig.getPropertyAsListOfTypes("pluginsIO");
+		this.io = listaIO.get(0);
 	}
 	
 	private void iniciaSistema() {
@@ -62,20 +59,21 @@ public class MigrantMatcher {
 				pedirAjuda();
 				break;
 			
-			case "voluntario": 
-				fazerDoacao(user);
+			case "voluntario":
+				fazerDoacao(this.io.getTel(""));
 				break;
 			
 			case "sair" :
-				this.io.escreve("\n\nObrigado por usar o nosso sistema !\n");
+				this.io.escreve("\n\nObrigado por utilizar o nosso sistema !\n");
 				System.exit(0);
 		}
 		
-		this.io.pergunta("Deseja efetuar mais operações ?");
-		if((this.io.recebe().toLowerCase().replaceAll("\\s+","")).equals("sim")) {
+		
+		if((this.io.pergunta("Deseja efetuar mais operações ?").toLowerCase().replaceAll("\\s+","")).equals("sim")) {
+			this.io.escreve("\n\n");
 			iniciaSistema();
 		}
-		else this.io.escreve("\n\nObrigado por usar o nosso sistema !\n");
+		else this.io.escreve("\n\nObrigado por utilizar o nosso sistema !\n");
 	}
 	
 	private void pedirAjuda() throws NumberFormatException {
@@ -100,12 +98,12 @@ public class MigrantMatcher {
 		
 	}
 
-	private void fazerDoacao(String user) throws NumberFormatException {
-		this.u = new Voluntario(Integer.parseInt(user));
+	private void fazerDoacao(int userTel) throws NumberFormatException {
+		this.u = new Voluntario(userTel);
 		this.catUsers.adicionaUser(u);
 		RegistarAjudaHandler registaAjuda= new RegistarAjudaHandler ((Voluntario) this.u, this.catRegioes,
 				this.catAjudas,this.pluginsSms,this.io);
-		registaAjuda.novaAjuda();
+		registaAjuda.iniciaRegisto();
 		registaAjuda.querConfirmar();
 	}
 

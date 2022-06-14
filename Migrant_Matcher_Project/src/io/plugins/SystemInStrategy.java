@@ -1,6 +1,8 @@
-package io;
+package io.plugins;
 
 import java.util.Scanner;
+
+import io.InputOutput;
 
 public class SystemInStrategy implements InputOutput {
 		
@@ -48,7 +50,7 @@ public class SystemInStrategy implements InputOutput {
 	@Override
 	public int getTel(String deAlguem) {
 		try {
-			System.out.println("Indique o telémovel " + deAlguem + ":");
+			System.out.println("\nIndique o número de telémovel " + deAlguem + ":");
 			System.out.print("\n\t-> ");
 			return Integer.parseInt(sc.next());
 		}

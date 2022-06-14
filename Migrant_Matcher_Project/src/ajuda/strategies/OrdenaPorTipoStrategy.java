@@ -1,28 +1,27 @@
 package ajuda.strategies;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import ajuda.Ajuda;
-import ajuda.CatalogoAjudas;
 
 public class OrdenaPorTipoStrategy implements OrdenaAjudas {
 
 
-	public OrdenaPorTipoStrategy() {
-	}
+	public OrdenaPorTipoStrategy() {}
 
 	@Override
-	public List<Ajuda> ordena(CatalogoAjudas catAjudas) {
-		List<Ajuda> list = new ArrayList<>();
-		for(Ajuda a : catAjudas.getAjudasEspecificas(x -> x.getTipoAjuda().equals("Alojamento"))) {
-			list.add(a);
+	public List<Ajuda> ordena(List<Ajuda> listAjudas) {
+		List<Ajuda> newList = new ArrayList<>();
+		for(Ajuda a : listAjudas) {
+			if(a.getTipoAjuda().equals("Alojamento"))
+				newList.add(a);
 		}
-		for(Ajuda a : catAjudas.getAjudasEspecificas(x -> x.getTipoAjuda().equals("Item"))) {
-			list.add(a);
+		for(Ajuda a : listAjudas) {
+			if(a.getTipoAjuda().equals("Item"))
+				newList.add(a);
 		}
-		return list;
+		return newList;
 	}
 
 }

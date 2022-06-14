@@ -27,41 +27,41 @@ public class RegistarAjudaHandler {
 		this.io = io;
 	}
 	
-	public void novaAjuda() {
-		this.io.escreve("Indique o tipo de ajuda que deseja fornecer:\n");
-		this.io.escreve("\t Tipos de Ajuda Disponiveis:");
+	public void iniciaRegisto() {
+		this.io.escreve("\nIndique o tipo de ajuda que deseja fornecer:\n");
+		this.io.escreve("Tipos de Ajuda Disponiveis: | ");
 		for(String s : catAjudas.getTiposAjuda()) {
-			this.io.escreve("\t\t"+ s.toUpperCase());
+			this.io.escreve(s.toUpperCase() + " | ");
 		}
-		this.io.pergunta("");
-		qualAjuda(this.io.recebe());
+		qualAjuda(this.io.pergunta(""));
 	}
 	
 	private void qualAjuda(String input) {
 		switch(input.toLowerCase()) {
 			case "alojamento" :
-				this.io.pergunta("Indique o número máximo de ocupação do alojamento:");
+				
 				try {
-					int num = this.io.getInt();
-					this.io.pergunta("Escolha uma região das seguintes apresentadas:\n"+
-				catRegioes.toString()+"\n");
-					criaAlojamento(num,this.io.recebe());
+					int num = Integer.parseInt(this.io.pergunta("\nIndique o número"
+							+ " máximo de ocupação do alojamento:"));
+					
+					criaAlojamento(num,this.io.pergunta("\nEscolha uma região das seguintes apresentadas:\n"+
+							catRegioes.toString()+"\n"));
 				}
 				catch(NumberFormatException e) {
-					this.io.escreve("Número não reconhecido. Por favor tente novamente...\n");
+					this.io.escreve("\nNúmero não reconhecido. Por favor tente novamente...\n");
 					qualAjuda("alojamento");
 				}
 				break;
 				
 			case "item" :
-				this.io.pergunta("Indique a descrição do item a ser oferecido:");
+				this.io.pergunta("\nIndique a descrição do item a ser oferecido:");
 				criaItem(this.io.recebe());
 				break;
 				
 			default :
-				this.io.pergunta("\n\t\tO tipo de ajuda introduzido não está disponível. \n"
+				this.io.pergunta("\nO tipo de ajuda introduzido não está disponível. \n"
 						+ "\t\tPor favor tente novamente...");
-				qualAjuda(this.io.recebe());
+				qualAjuda(this.io.pergunta(""));
 				break;
 		}	
 		
@@ -78,13 +78,12 @@ public class RegistarAjudaHandler {
 	public void adicionarAjuda() {
 		ConfirmaSms confirm = new ConfirmaSms(pluginsSms);
 		confirm.sendCod(String.valueOf(voluntario.getTel()));
-		this.io.pergunta("Indique o código que lhe foi enviado por sms:");
 		confirma(confirm);
 
 	}
 
 	private void confirma(ConfirmaSms confirm) {
-		if(confirm.estahConfirmado(this.io.recebe())) {
+		if(confirm.estahConfirmado(this.io.pergunta("Indique o código que lhe foi enviado por sms:"))) {
 			this.voluntario.addAjuda(this.criaAjuda.getAjuda());
 			this.catAjudas.adicionaAjuda(criaAjuda.getAjuda());
 		}
@@ -97,14 +96,14 @@ public class RegistarAjudaHandler {
 	}
 
 	public void querConfirmar() {
-		this.io.pergunta("Deseja confirmar a sua doação?");
-		if(this.io.recebe().toLowerCase().equals("sim")) {
+		
+		if(this.io.pergunta("Deseja confirmar a sua doação?").toLowerCase().contains("sim")) {
 			adicionarAjuda();
 		}
 		else {
-			this.io.escreve("Pretende criar uma nova doação?");
-			if(this.io.recebe().toLowerCase().equals("sim")) {
-
+			
+			if(this.io.pergunta("Pretende criar uma nova doação?").toLowerCase().contains("sim")) {
+				iniciaRegisto();
 			}
 			else {
 				this.io.escreve("Obrigado por ter utilizado o programa MIGRANT MATCHER!");

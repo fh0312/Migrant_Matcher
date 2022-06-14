@@ -47,32 +47,36 @@ public class ProcurarAjudaHandler {
 	
 	public void localizacao() {
 		while (this.r == null) {
-			pergunta("\nPara onde se deseja mover?\n"+ this.catRegioes.toString());
-			this.r = catRegioes.getRegiao(io.recebe());
+			this.r = catRegioes.getRegiao(this.io.pergunta("\nPara onde se deseja mover?\n"
+		+ this.catRegioes.toString()));
 			if(r == null)
-				System.out.println("Regiao não encontrada. Por favor tente novamente...");
+				this.io.escreve("Regiao não encontrada. Por favor tente novamente...\n");
 		}
 	}
 	
 	public void escolheAjudas() {
-		pergunta("Indique o método de ordenação para a lista de "
+		String ordem = this.io.pergunta("Indique o método de ordenação para a lista de "
 				+ "ajudas da regiao indicada, tipo ou data:");
-		String ordem = this.io.recebe();
-		System.out.println(this.catAjudas.imprimeAjudasPorOrdem(this.catAjudas.getAjudasPorOrdem(ordem)));
+		this.io.escreve(this.catAjudas.imprimeAjudasPorOrdem(this.catAjudas.getAjudasPorOrdem(ordem,this.r))+"\n");
 		this.migrante.setPaCorrente(new PedidoAjuda(this.catAjudas));
 		do {
 			this.migrante.getPaCorrente().adicionaAjuda(getAjudaInidicada(ordem));
-			pergunta("Deseja adionar mais ajudas?");
+			
 		}
-		while(((this.io.recebe().toLowerCase().split("\\s"))[0]).equals("sim"));
+		while(((this.io.pergunta("Deseja adionar mais ajudas?").toLowerCase().split("\\s"))[0]).equals("sim"));
 	}
 
 	private Ajuda getAjudaInidicada(String ordem) {
-		pergunta("\nIndique o número da ajuda desejada:");
+		
 		try {
-			Ajuda a = this.catAjudas.getAjudasPorOrdem(ordem).get(this.io.getInt());
+			int num = Integer.parseInt(this.io.pergunta("\nIndique o número da ajuda desejada:"));
+			if(num>=this.catAjudas.getAjudasPorOrdem(ordem,this.r).size()-1) {
+				this.io.escreve("\nNúmero inválido!\nPor favor tente novamente...\n\n\n");
+				return getAjudaInidicada(ordem);
+			}
+			Ajuda a = this.catAjudas.getAjudasPorOrdem(ordem,this.r).get(num);
 			if (a == null) {
-				System.out.println("Ajuda Incorreta...\nPorfavor tente novamente.");
+				this.io.escreve("Ajuda Incorreta...\nPorfavor tente novamente.\n\n");
 				return getAjudaInidicada(ordem);
 			}
 			return a;
@@ -83,8 +87,7 @@ public class ProcurarAjudaHandler {
 	}
 
 	public void confirma() {
-		pergunta("Deseja confirmar o seu pedido ?");
-		if(((this.io.recebe().toLowerCase().split("\\s"))[0]).equals("sim")) {
+		if(((this.io.pergunta("Deseja confirmar o seu pedido ?").toLowerCase().split("\\s"))[0]).equals("sim")) {
 			this.migrante.getPaCorrente().confirmaPedido();
 			this.migrante.adicionaPedido(this.migrante.getPaCorrente());
 			voluntarioCheck();
@@ -100,12 +103,6 @@ public class ProcurarAjudaHandler {
 			pluginsSms.get(0).send("Um migrante requisitou a ajuda: " + a.toString(),
 					String.valueOf(a.getDoador().getTel()));
 		});
-		
-	}
-
-	private void pergunta(String string) {
-		System.out.println(string);
-		System.out.print("\t-> ");
 	}
 
 
