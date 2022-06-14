@@ -1,16 +1,16 @@
-package Main;
+package main;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import IO.SystemInStrategy;
 import ajuda.CatalogoAjudas;
 import ajuda.sms.EnviadoresSMS;
 import configuration.MinhaConfig;
 import handlers.ProcurarAjudaHandler;
 import handlers.RegistaMigranteHandler;
 import handlers.RegistarAjudaHandler;
+import io.SystemInStrategy;
 import regiao.CatalogoRegioes;
 import utilizador.CatalogoUtilizadores;
 import utilizador.Migrante;

@@ -16,8 +16,8 @@ public class CatalogoAjudas {
 private HashMap<String,List<Ajuda>> ajudasDisponiveis;
 private String[] tiposDeAjuda ;
 	
-	public CatalogoAjudas(String[] strings) {
-		this.tiposDeAjuda = strings;
+	public CatalogoAjudas(String[] tiposDeAjudas) {
+		this.tiposDeAjuda = tiposDeAjudas;
 		this.ajudasDisponiveis = new HashMap<>();
 	}
 	

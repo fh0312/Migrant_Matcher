@@ -1,8 +1,8 @@
-package IO;
+package io;
 
 import java.util.Scanner;
 
-import Main.InputOutput;
+import main.InputOutput;
 
 public class SystemInStrategy implements InputOutput {
 		

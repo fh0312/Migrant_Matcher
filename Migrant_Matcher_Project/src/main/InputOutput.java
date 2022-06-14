@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 public interface InputOutput {
 		public void escreve(String s);
