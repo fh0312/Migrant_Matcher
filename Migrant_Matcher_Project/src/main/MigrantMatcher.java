@@ -87,8 +87,16 @@ public class MigrantMatcher {
 	}
 	
 	private void pedirAjuda() throws NumberFormatException {
-		
-		this.u = new RegistaMigranteHandler(this.sc).getMigrante();
+		RegistaMigranteHandler registo =new RegistaMigranteHandler(this.sc);
+		this.u = registo.getMigrante();
+		try{
+			registo.iniciaRegisto();
+		}
+		catch(NumberFormatException e) {
+			System.out.println(" Número de telemovel inválido! \nPor favor tente novamente...\n");
+			new RegistaMigranteHandler(sc);
+		}
+
 		ProcurarAjudaHandler procuraAjuda = new ProcurarAjudaHandler((Migrante) this.u,
 				this.catRegioes,this.catAjudas,this.pluginsSms,this.sc);
 		procuraAjuda.localizacao();
