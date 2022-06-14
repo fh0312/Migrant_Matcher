@@ -43,9 +43,8 @@ class Tests {
 		Voluntario v = new Voluntario(telVoluntario);
 		Regiao lisboa = new Regiao("Lisboa");
 		Ajuda aloj1 = new Alojamento(4, lisboa, v);
-		Ajuda item1 = new Item("brinquedo");
-		String[] s = {"Alojamento", "Item"};
-		CatalogoAjudas catA = new CatalogoAjudas(s);
+		Ajuda item1 = new Item("brinquedo",v);
+		CatalogoAjudas catA = new CatalogoAjudas();
 		catA.adicionaAjuda(aloj1);
 		catA.adicionaAjuda(item1);
 		assertEquals(aloj1, catA.getAjuda(aloj1.getNome()));
@@ -60,11 +59,10 @@ class Tests {
 		Ajuda aloj1 = new Alojamento(4, lisboa, v);
 		Ajuda aloj2 = new Alojamento(5, lisboa, v);
 		Ajuda aloj3 = new Alojamento(6, lisboa, v);
-		Ajuda item1 = new Item("brinquedo1");
-		Ajuda item2 = new Item("brinquedo2");
-		Ajuda item3 = new Item("brinquedo3");
-		String[] s = {"Alojamento", "Item"};
-		CatalogoAjudas catA = new CatalogoAjudas(s);
+		Ajuda item1 = new Item("brinquedo1",v);
+		Ajuda item2 = new Item("brinquedo2",v);
+		Ajuda item3 = new Item("brinquedo3",v);
+		CatalogoAjudas catA = new CatalogoAjudas();
 		Migrante migrante = new Migrante(nomeMigrante1, telMigrante1);
 		
 		catA.adicionaAjuda(aloj1);

@@ -2,8 +2,6 @@ package io;
 
 import java.util.Scanner;
 
-import main.InputOutput;
-
 public class SystemInStrategy implements InputOutput {
 		
 	private Scanner sc;
@@ -28,14 +26,23 @@ public class SystemInStrategy implements InputOutput {
 
 	@Override
 	public int getInt() {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			return Integer.parseInt(sc.next());
+		}
+		catch(NumberFormatException e) {
+			escreve("O número introduzido não é válido.\n"
+					+ "Porfavor tente novamente...\n");
+			return getInt();
+		}
 	}
 	
 	@Override
 	public void escreve(String s) {
-		System.out.println(s);
-		
+		System.out.print(s);
+	}
+	@Override
+	public String recebe() {
+		return sc.next();
 	}
 
 	@Override

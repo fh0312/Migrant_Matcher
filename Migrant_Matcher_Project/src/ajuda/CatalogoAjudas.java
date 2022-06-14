@@ -14,10 +14,9 @@ import regiao.Regiao;
 
 public class CatalogoAjudas {
 private HashMap<String,List<Ajuda>> ajudasDisponiveis;
-private String[] tiposDeAjuda ;
+
 	
-	public CatalogoAjudas(String[] tiposDeAjudas) {
-		this.tiposDeAjuda = tiposDeAjudas;
+	public CatalogoAjudas() {
 		this.ajudasDisponiveis = new HashMap<>();
 	}
 	
@@ -61,9 +60,6 @@ private String[] tiposDeAjuda ;
 		return (List<Ajuda>) stream.collect(Collectors.toList());
 	}
 	
-	public List<String> getTiposAjuda(){
-		return Arrays.asList(this.tiposDeAjuda);
-	}
 
 	public List<Ajuda> getAjudasPorOrdem(String ordem) {
 		if(ordem.toLowerCase().contains("data"))
@@ -84,6 +80,11 @@ private String[] tiposDeAjuda ;
 			count++;
 			}
 		return result.toString();
+	}
+
+	public String[] getTiposAjuda() {
+		String[] tipos = {"Alojamento","Item"};
+		return tipos;
 	}
 
 		

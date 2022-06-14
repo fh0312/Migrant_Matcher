@@ -10,6 +10,7 @@ import configuration.MinhaConfig;
 import handlers.ProcurarAjudaHandler;
 import handlers.RegistaMigranteHandler;
 import handlers.RegistarAjudaHandler;
+import io.InputOutput;
 import io.SystemInStrategy;
 import regiao.CatalogoRegioes;
 import utilizador.CatalogoUtilizadores;
@@ -23,28 +24,24 @@ public class MigrantMatcher {
 	private CatalogoRegioes catRegioes;
 	private CatalogoAjudas catAjudas;
 	private CatalogoUtilizadores catUsers;
-	private List<EnviadoresSMS> pluginsSms ;
+	private List<EnviadoresSMS> pluginsSms;
 	private InputOutput io;
-	private Scanner sc;
 	
 	
 	
-	public MigrantMatcher(String tiposAjuda,Scanner scanner) {
-		this.catAjudas = new CatalogoAjudas(tiposAjuda.split(","));
+	public MigrantMatcher(InputOutput io) {
+		this.catAjudas = new CatalogoAjudas();
 		this.catRegioes = new CatalogoRegioes();
 		this.catUsers = new CatalogoUtilizadores();
 		this.pluginsSms = new ArrayList<EnviadoresSMS>() ;
-		this.sc = scanner;
-		this.io = new SystemInStrategy();
-		System.out.println(("\n\tBem vindo ao programa Migrant Matcher!\n").toUpperCase());
+		this.io = io; 
 		carregarPlugins();
-		help();
-		init(sc.next().toLowerCase().replaceAll("\\s+",""));
+		this.io.escreve(("\n\tBem vindo ao programa Migrant Matcher!\n\n").toUpperCase());
+		iniciaSistema();
 	}
 	
-	public MigrantMatcher(String tiposAjuda) { //default input
-		this(tiposAjuda,new Scanner(System.in));
-
+	public MigrantMatcher() { //default System.in and System.out
+		this(new SystemInStrategy());
 	}
                                                                                                                                                                                 
 
@@ -54,51 +51,47 @@ public class MigrantMatcher {
 			pluginsSms.add(p);
 		}
 	}
-
-	private void help() {
-		System.out.println(" - Para procurar uma ajuda:\t escreva migrante");
-		System.out.println(" - Para fazer uma doação:\t escreva voluntario");
-		System.out.println(" - Para sair do programa:\t escreva sair");
-		System.out.print("\n\t-> ");
-	}
 	
-	private void init(String user) {
+	private void iniciaSistema() {
+		String user = this.io.pergunta(" - Para procurar uma ajuda:\t escreva migrante\n"
+				+ " - Para fazer uma doação:\t escreva voluntario\n"
+				+ " - Para sair do programa:\t escreva sair\n")
+				.toLowerCase().replaceAll("\\s+","");
 		switch (user) {
-			case "migrante" : {
+			case "migrante" : 
 				pedirAjuda();
 				break;
-			}
-			case "voluntario": {
+			
+			case "voluntario": 
 				fazerDoacao(user);
 				break;
-			}	
-			case "sair" :{
-				System.out.println("\n\nObrigado por usar o nosso sistema !");
+			
+			case "sair" :
+				this.io.escreve("\n\nObrigado por usar o nosso sistema !\n");
 				System.exit(0);
-			}
 		}
-		System.out.println("Deseja efetuar mais operações ?");
-		System.out.print("\n\t-> ");
-		if((sc.next().toLowerCase().split("\\s"))[0].equals("sim")) {
-			help();
-			init(sc.next());
+		
+		this.io.pergunta("Deseja efetuar mais operações ?");
+		if((this.io.recebe().toLowerCase().replaceAll("\\s+","")).equals("sim")) {
+			iniciaSistema();
 		}
-		else System.out.println("\n\nObrigado por usar o nosso sistema !");
+		else this.io.escreve("\n\nObrigado por usar o nosso sistema !\n");
 	}
 	
 	private void pedirAjuda() throws NumberFormatException {
-		RegistaMigranteHandler registo =new RegistaMigranteHandler(this.sc);
-		this.u = registo.getMigrante();
+		RegistaMigranteHandler registo = new RegistaMigranteHandler(this.io);
 		try{
 			registo.iniciaRegisto();
+			this.u = registo.getMigrante();
+			this.catUsers.adicionaUser(u);
 		}
 		catch(NumberFormatException e) {
-			System.out.println(" Número de telemovel inválido! \nPor favor tente novamente...\n");
-			new RegistaMigranteHandler(sc);
+			this.io.escreve(" Número de telemovel inválido! \nPor favor tente novamente...\n\n");
+			new RegistaMigranteHandler(this.io);
 		}
 
 		ProcurarAjudaHandler procuraAjuda = new ProcurarAjudaHandler((Migrante) this.u,
-				this.catRegioes,this.catAjudas,this.pluginsSms,this.sc);
+				this.catRegioes,this.catAjudas,this.pluginsSms,this.io);
 		procuraAjuda.localizacao();
 		procuraAjuda.escolheAjudas();
 		procuraAjuda.confirma();
@@ -109,8 +102,9 @@ public class MigrantMatcher {
 
 	private void fazerDoacao(String user) throws NumberFormatException {
 		this.u = new Voluntario(Integer.parseInt(user));
+		this.catUsers.adicionaUser(u);
 		RegistarAjudaHandler registaAjuda= new RegistarAjudaHandler ((Voluntario) this.u, this.catRegioes,
-				this.catAjudas,this.pluginsSms,this.sc);
+				this.catAjudas,this.pluginsSms,this.io);
 		registaAjuda.novaAjuda();
 		registaAjuda.querConfirmar();
 	}
