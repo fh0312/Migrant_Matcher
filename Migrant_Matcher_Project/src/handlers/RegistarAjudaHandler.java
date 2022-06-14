@@ -1,12 +1,12 @@
 package handlers;
 
 import java.util.List;
-import java.util.Scanner;
 
 import ajuda.CatalogoAjudas;
 import ajuda.sms.ConfirmaSms;
 import ajuda.sms.EnviadoresSMS;
 import handlers.criaAjuda.CriaAjuda;
+import io.InputOutput;
 import regiao.CatalogoRegioes;
 import utilizador.Voluntario;
 
@@ -15,85 +15,80 @@ public class RegistarAjudaHandler {
 	private CatalogoRegioes catRegioes;
 	private Voluntario voluntario;
 	private CriaAjuda criaAjuda;
-	private Scanner sc ;
 	private List<EnviadoresSMS> pluginsSms;
+	private InputOutput io;
 	
 	public RegistarAjudaHandler(Voluntario v,CatalogoRegioes catR,CatalogoAjudas catA,
-			List<EnviadoresSMS> plugins,Scanner scIn) {
+			List<EnviadoresSMS> plugins,InputOutput io) {
 		this.voluntario = v;
 		this.catRegioes = catR;	
 		this.catAjudas= catA;
 		this.pluginsSms = plugins;
-		this.sc = scIn;
+		this.io = io;
 	}
 	
-	public void novaAjuda() {
-		System.out.println("Indique o tipo de ajuda que deseja fornecer:\n");
-		System.out.println("\t Tipos de Ajuda Disponiveis:");
+	public void iniciaRegisto() {
+		this.io.escreve("\nIndique o tipo de ajuda que deseja fornecer:\n");
+		this.io.escreve("Tipos de Ajuda Disponiveis: | ");
 		for(String s : catAjudas.getTiposAjuda()) {
-			System.out.println("\t\t"+ s.toUpperCase());
+			this.io.escreve(s.toUpperCase() + " | ");
 		}
-		System.out.print("\n\t-> ");
-		
-		qualAjuda(sc.next());
-		
+		qualAjuda(this.io.pergunta(""));
 	}
 	
 	private void qualAjuda(String input) {
 		switch(input.toLowerCase()) {
 			case "alojamento" :
-				criaAlojamento();
+				
+				try {
+					int num = Integer.parseInt(this.io.pergunta("\nIndique o número"
+							+ " máximo de ocupação do alojamento:"));
+					
+					criaAlojamento(num,this.io.pergunta("\nEscolha uma região das seguintes apresentadas:\n"+
+							catRegioes.toString()+"\n"));
+				}
+				catch(NumberFormatException e) {
+					this.io.escreve("\nNúmero não reconhecido. Por favor tente novamente...\n");
+					qualAjuda("alojamento");
+				}
 				break;
 				
 			case "item" :
-				criaItem();
+				this.io.pergunta("\nIndique a descrição do item a ser oferecido:");
+				criaItem(this.io.recebe());
 				break;
 				
 			default :
-				System.out.println("\n\t\tO tipo de ajuda introduzido não está disponível. \n"
+				this.io.pergunta("\nO tipo de ajuda introduzido não está disponível. \n"
 						+ "\t\tPor favor tente novamente...");
-				System.out.print("\n\t\t-> ");
-				qualAjuda(sc.next());
+				qualAjuda(this.io.pergunta(""));
 				break;
 		}	
 		
 	}
 
-	private void criaItem() {
-		System.out.println("Indique a descrição do item a ser oferecido:");
-		System.out.print("\n\t-> ");
-		this.criaAjuda = new CriaAjuda(sc.next(),catRegioes,this.voluntario);
+	private void criaItem(String desc) {
+		this.criaAjuda = new CriaAjuda(desc,this.voluntario);
 	}
 
-	private void criaAlojamento() {
-		System.out.println("Indique o número máximo de ocupação do alojamento:");
-		System.out.print("\n\t-> ");
-		try {
-			this.criaAjuda = new CriaAjuda(Integer.parseInt(sc.next()),catRegioes);
-		}
-		catch(NumberFormatException e) {
-			System.out.println("Número não reconhecido. Por favor tente novamente...");
-			criaAlojamento();
-		}
-		
+	private void criaAlojamento(int n, String nomeRegiao) {
+		this.criaAjuda = new CriaAjuda(n,this.catRegioes.getRegiao(nomeRegiao.toLowerCase()),this.voluntario);
 	}
 
 	public void adicionarAjuda() {
 		ConfirmaSms confirm = new ConfirmaSms(pluginsSms);
 		confirm.sendCod(String.valueOf(voluntario.getTel()));
-		System.out.println("Indique o código que lhe foi enviado por sms:");
 		confirma(confirm);
 
 	}
 
 	private void confirma(ConfirmaSms confirm) {
-		System.out.print("\n\t-> ");
-		if(confirm.estahConfirmado(sc.next())) {
+		if(confirm.estahConfirmado(this.io.pergunta("Indique o código que lhe foi enviado por sms:"))) {
 			this.voluntario.addAjuda(this.criaAjuda.getAjuda());
 			this.catAjudas.adicionaAjuda(criaAjuda.getAjuda());
 		}
 		else {
-			System.out.println("Código errado! Porfavor tente novamente.");
+			this.io.escreve("Código errado! Porfavor tente novamente.");
 			confirma(confirm);
 		}
 		
@@ -101,18 +96,17 @@ public class RegistarAjudaHandler {
 	}
 
 	public void querConfirmar() {
-		System.out.println("Deseja confirmar a sua doação?");
-		System.out.print("\n\t-> ");
-		if(sc.next().toLowerCase().equals("sim")) {
+		
+		if(this.io.pergunta("Deseja confirmar a sua doação?").toLowerCase().contains("sim")) {
 			adicionarAjuda();
 		}
 		else {
-			System.out.println("Pretende criar uma nova doação?");
-			if(sc.next().toLowerCase().equals("sim")) {
-
+			
+			if(this.io.pergunta("Pretende criar uma nova doação?").toLowerCase().contains("sim")) {
+				iniciaRegisto();
 			}
 			else {
-				System.out.println("Obrigado por ter utilizado o programa MIGRANT MATCHER!");
+				this.io.escreve("Obrigado por ter utilizado o programa MIGRANT MATCHER!");
 				System.exit(0);
 			}
 		}

@@ -7,6 +7,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/2002f/OneDrive - Universidade de Lisboa/Ambiente de Trabalho/DCO/Projeto2/smsproviders.jar"/>
+	<classpathentry kind="lib" path="smsproviders.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

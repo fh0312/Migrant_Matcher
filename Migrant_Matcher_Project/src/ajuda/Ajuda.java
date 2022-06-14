@@ -23,7 +23,8 @@ public abstract class Ajuda {
 		return dataCriacao;
 	}
 
-	public Ajuda() {
+	public Ajuda(Voluntario v) {
+		this.doador = v;
 		this.dataCriacao = new Date();
 	}
 	

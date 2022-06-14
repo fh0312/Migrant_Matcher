@@ -14,10 +14,9 @@ import regiao.Regiao;
 
 public class CatalogoAjudas {
 private HashMap<String,List<Ajuda>> ajudasDisponiveis;
-private String[] tiposDeAjuda ;
+
 	
-	public CatalogoAjudas(String[] strings) {
-		this.tiposDeAjuda = strings;
+	public CatalogoAjudas() {
 		this.ajudasDisponiveis = new HashMap<>();
 	}
 	
@@ -47,11 +46,7 @@ private String[] tiposDeAjuda ;
 		return ajudas;
 	}
 
-	public List<Ajuda> getAjudasPorRegiao(Regiao r){
-		Stream<Ajuda> stream = this.getAjudas().stream()
-				.filter(a -> a.getClass().equals(Alojamento.class) && (a.regiao).equals(r));
-		return (List<Ajuda>) stream.collect(Collectors.toList());
-	}
+
 	/*
 	 * Obtem uma lista de ajudas especificas filtrando de acordo com o predicado indicado
 	 */
@@ -61,18 +56,21 @@ private String[] tiposDeAjuda ;
 		return (List<Ajuda>) stream.collect(Collectors.toList());
 	}
 	
-	public List<String> getTiposAjuda(){
-		return Arrays.asList(this.tiposDeAjuda);
-	}
 
-	public List<Ajuda> getAjudasPorOrdem(String ordem) {
+	public List<Ajuda> getAjudasPorOrdem(String ordem,Regiao r) {
 		if(ordem.toLowerCase().contains("data"))
-			return new OrdenaPorDataStrategy().ordena(this);
+			return new OrdenaPorDataStrategy().ordena(this.getAjudasPorRegiao(r));
 		
 		else if(ordem.toLowerCase().contains("tipo"))
-			return new OrdenaPorTipoStrategy().ordena(this);
+			return new OrdenaPorTipoStrategy().ordena(this.getAjudasPorRegiao(r));
 		
 		return Arrays.asList();
+	}
+	
+	public List<Ajuda> getAjudasPorRegiao(Regiao r){
+		Stream<Ajuda> stream = this.getAjudas().stream()
+				.filter(a -> a.getClass().equals(Item.class) || (a.getClass().equals(Alojamento.class) && (a.regiao).equals(r) ));
+		return (List<Ajuda>) stream.collect(Collectors.toList());
 	}
 	
 	public String imprimeAjudasPorOrdem(List<Ajuda> list) {
@@ -84,6 +82,11 @@ private String[] tiposDeAjuda ;
 			count++;
 			}
 		return result.toString();
+	}
+
+	public String[] getTiposAjuda() {
+		String[] tipos = {"Alojamento","Item"};
+		return tipos;
 	}
 
 		
