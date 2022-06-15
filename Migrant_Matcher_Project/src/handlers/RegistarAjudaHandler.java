@@ -33,13 +33,12 @@ public class RegistarAjudaHandler {
 		for(String s : catAjudas.getTiposAjuda()) {
 			this.io.escreve(s.toUpperCase() + " | ");
 		}
-		qualAjuda(this.io.pergunta(""));
+		registaAjuda(this.io.pergunta(""));
 	}
 	
-	private void qualAjuda(String input) {
-		switch(input.toLowerCase()) {
+	private void registaAjuda(String tipoAjuda) {
+		switch(tipoAjuda.toLowerCase()) {
 			case "alojamento" :
-				
 				try {
 					int num = Integer.parseInt(this.io.pergunta("\nIndique o número"
 							+ " máximo de ocupação do alojamento:"));
@@ -49,7 +48,7 @@ public class RegistarAjudaHandler {
 				}
 				catch(NumberFormatException e) {
 					this.io.escreve("\nNúmero não reconhecido. Por favor tente novamente...\n");
-					qualAjuda("alojamento");
+					registaAjuda("alojamento");
 				}
 				break;
 				
@@ -61,7 +60,7 @@ public class RegistarAjudaHandler {
 			default :
 				this.io.pergunta("\nO tipo de ajuda introduzido não está disponível. \n"
 						+ "\t\tPor favor tente novamente...");
-				qualAjuda(this.io.pergunta(""));
+				registaAjuda(this.io.pergunta(""));
 				break;
 		}	
 		
