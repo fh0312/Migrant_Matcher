@@ -11,7 +11,7 @@ public class CatalogoRegioes {
 	public CatalogoRegioes() {
 		this.regioesDisponiveis = new HashMap<>();
 		String regioes = "lisboa,porto,setubal,braga,aveiro,faro,leiria,santarem,"
-				+ "coimbra,viseu,madeira,açores";
+				+ "coimbra,viseu,madeira,acores";
 		for(String s : regioes.split(",")) {
 			adicionaRegiao(new Regiao(s));
 		}

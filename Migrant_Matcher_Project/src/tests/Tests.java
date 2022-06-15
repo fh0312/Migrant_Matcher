@@ -3,6 +3,8 @@ package tests;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -11,7 +13,10 @@ import ajuda.Ajuda;
 import ajuda.Alojamento;
 import ajuda.CatalogoAjudas;
 import ajuda.Item;
+import ajuda.sms.EnviadoresSMS;
+import handlers.ProcurarAjudaHandler;
 import handlers.RegistaMigranteHandler;
+import io.InputOutput;
 import pedido_ajuda.PedidoAjuda;
 import regiao.CatalogoRegioes;
 import regiao.Regiao;
@@ -30,10 +35,6 @@ class Tests {
 		CatalogoRegioes catR = new CatalogoRegioes();
 		catR.adicionaRegiao(r1);
 		catR.adicionaRegiao(r2);
-		for(Regiao r : catR.getRegioes()) {
-			System.out.println(r.getNome());
-		}
-		System.out.println("Regiao r2 = "+catR.getRegiao(r2.getNome()));
 		assertEquals(r1, catR.getRegiao(r1.getNome()));
 		assertEquals(r2, catR.getRegiao(r2.getNome()));
 	}
@@ -115,6 +116,28 @@ class Tests {
 			}
 		}
 	}
+	
+	@Test
+	void listaRegioes() {
+		String[] lista = {"lisboa","porto","setubal","braga","aveiro","faro", "leiria","santarem","coimbra","viseu","madeira","acores"};
+		List<String> lista_de_testes = new ArrayList<>();
+		for(String s: lista) {
+			lista_de_testes.add(s);
+		}
+		
+		CatalogoRegioes catR = new CatalogoRegioes();
+		List<String> lista_do_catalogo = new ArrayList<>();
+		for(Regiao r: catR.getRegioes()) {
+			lista_do_catalogo.add(r.getNome());
+		}
+		
+		Collections.sort(lista_de_testes);
+		Collections.sort(lista_do_catalogo);
+		
+		for(int i = 0; i < lista_do_catalogo.size(); i++) {
+			assertEquals(lista_de_testes.get(i), lista_do_catalogo.get(i));
+		}
+	} 
 //	
 //	@Test
 //	void registarProcurar() {
