@@ -20,6 +20,7 @@ Para utilização do Script: casoDeUsoProcurarAjuda()
 				-(inserir nome)
 				-(inserir regiao para onde se vai mudar)
 				-(inserir tipo de ordenacao das ajudas - tipo ou data)
+				-0 // primeira ajuda da lista caso já tenha sido adionada alguma.
+				-nao	//nao desejo adicionar mais ajudas
 				-sim  //sim desejo confirmar a reserva
 				-nao	//nao desejo mais operacoes			
-		- 
