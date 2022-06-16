@@ -8,16 +8,23 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import ajuda.sms.EnviadoresSMS;
 import ajuda.strategies.OrdenaPorDataStrategy;
 import ajuda.strategies.OrdenaPorTipoStrategy;
+import observer.Observable;
+import observer.Observer;
 import regiao.Regiao;
 
-public class CatalogoAjudas {
-private HashMap<String,List<Ajuda>> ajudasDisponiveis;
-
+public class CatalogoAjudas implements Observable {
 	
-	public CatalogoAjudas() {
+	private HashMap<String,List<Ajuda>> ajudasDisponiveis;
+	private List<Observer> observers; 
+	private List<EnviadoresSMS> pluginsSms;
+	
+	public CatalogoAjudas(List<EnviadoresSMS> plugins) {
+		this.pluginsSms = plugins;
 		this.ajudasDisponiveis = new HashMap<>();
+		this.observers = new ArrayList<>();
 	}
 	
 	public void adicionaAjuda(Ajuda a) {
@@ -25,6 +32,7 @@ private HashMap<String,List<Ajuda>> ajudasDisponiveis;
 			this.ajudasDisponiveis.put(a.getNome(),new ArrayList<Ajuda>());
 		}
 		this.ajudasDisponiveis.get(a.getNome()).add(a);
+		this.notificaObservers();
 	}
 	
 	public void removeAjuda(Ajuda a) {
@@ -87,6 +95,32 @@ private HashMap<String,List<Ajuda>> ajudasDisponiveis;
 	public String[] getTiposAjuda() {
 		String[] tipos = {"Alojamento","Item"};
 		return tipos;
+	}
+
+	@Override
+	public void registaObserver(Observer obs) {
+		if(obs != null)
+			this.observers.add(obs);
+	}
+
+	@Override
+	public void notificaObservers() {
+		for(Observer obs : this.observers) {
+			obs.atualiza(this);
+		}
+	}
+
+	@Override
+	public void removeObserver(Observer obs) {
+		if(obs != null)
+			this.observers.remove(obs);
+	}
+
+	/**
+	 * @return the pluginsSms
+	 */
+	public List<EnviadoresSMS> getPluginsSms() {
+		return pluginsSms;
 	}
 
 		

@@ -8,6 +8,7 @@ import ajuda.CatalogoAjudas;
 import ajuda.Item;
 import ajuda.sms.EnviadoresSMS;
 import io.InputOutput;
+import observer.ObservaAjudas;
 import pedido_ajuda.PedidoAjuda;
 import regiao.CatalogoRegioes;
 import regiao.Regiao;
@@ -34,9 +35,9 @@ public class ProcurarAjudaHandler {
 				catAjudas.adicionaAjuda(new Alojamento(4, catR.getRegiao("viseu"),defaultV));
 				catAjudas.adicionaAjuda(new Alojamento(5, catR.getRegiao("viseu"),defaultV));
 				String locais = "faca,garfo,colher,vela,barco,pinha,foto,toalhaDeMesa";
-				for(String s : locais.split(",")) {
-					catAjudas.adicionaAjuda(new Item(s,defaultV));
-				}
+//				for(String s : locais.split(",")) {
+//					catAjudas.adicionaAjuda(new Item(s,defaultV));
+//				}
 		//DEFAULT Helps
 		
 		this.catRegioes = catR;
@@ -45,7 +46,7 @@ public class ProcurarAjudaHandler {
 		this.pluginsSms=plugins;
 	}
 	
-	public void localizacao() {
+	public void escolheRegiao() {
 		while (this.r == null) {
 			this.r = catRegioes.getRegiao(this.io.pergunta("\nPara onde se deseja mover?\n"
 		+ this.catRegioes.toString()));
@@ -57,13 +58,20 @@ public class ProcurarAjudaHandler {
 	public void escolheAjudas() {
 		String ordem = this.io.pergunta("Indique o método de ordenação para a lista de "
 				+ "ajudas da regiao indicada, tipo ou data:");
-		this.io.escreve(this.catAjudas.imprimeAjudasPorOrdem(this.catAjudas.getAjudasPorOrdem(ordem,this.r))+"\n");
-		this.migrante.setPaCorrente(new PedidoAjuda(this.catAjudas));
-		do {
-			this.migrante.getPaCorrente().adicionaAjuda(getAjudaInidicada(ordem));
-			
+		List<Ajuda> list = this.catAjudas.getAjudasPorOrdem(ordem,this.r);
+		if (list.isEmpty()) { //Extensao 5a
+			this.io.escreve("Ainda não existem ajudas nessa região.\n"
+					+ "Iremos notifica-lo assim que existir alguma ajuda.\n");
+			this.catAjudas.registaObserver(new ObservaAjudas(migrante, r));
 		}
-		while(((this.io.pergunta("Deseja adionar mais ajudas?").toLowerCase().split("\\s"))[0]).equals("sim"));
+		else {
+			this.io.escreve(this.catAjudas.imprimeAjudasPorOrdem(this.catAjudas.getAjudasPorOrdem(ordem,this.r))+"\n");	
+			this.migrante.setPaCorrente(new PedidoAjuda(this.catAjudas));
+			do {
+				this.migrante.getPaCorrente().adicionaAjuda(getAjudaInidicada(ordem));
+			}
+			while(((this.io.pergunta("Deseja adionar mais ajudas?").toLowerCase().split("\\s"))[0]).equals("sim"));
+		}
 	}
 
 	private Ajuda getAjudaInidicada(String ordem) {
@@ -87,7 +95,8 @@ public class ProcurarAjudaHandler {
 	}
 
 	public void confirma() {
-		if(((this.io.pergunta("Deseja confirmar o seu pedido ?").toLowerCase().split("\\s"))[0]).equals("sim")) {
+		if(((this.io.pergunta("\nDeseja confirmar o seu pedido ?").toLowerCase().split("\\s"))[0]).equals("sim") && 
+				this.migrante.getPaCorrente() != null) {
 			this.migrante.getPaCorrente().confirmaPedido();
 			this.migrante.adicionaPedido(this.migrante.getPaCorrente());
 			voluntarioCheck();

@@ -28,11 +28,11 @@ public class MigrantMatcher {
 	
 	
 	public MigrantMatcher() {
-		this.catAjudas = new CatalogoAjudas();
-		this.catRegioes = new CatalogoRegioes();
-		this.catUsers = new CatalogoUtilizadores();
 		this.pluginsSms = new ArrayList<EnviadoresSMS>() ; 
 		carregarPlugins();
+		this.catRegioes = new CatalogoRegioes();
+		this.catUsers = new CatalogoUtilizadores();
+		this.catAjudas = new CatalogoAjudas(this.pluginsSms);
 		this.io.escreve(("\n\tBem vindo ao programa Migrant Matcher!\n\n").toUpperCase());
 		iniciaSistema();
 	}
@@ -88,7 +88,7 @@ public class MigrantMatcher {
 
 		ProcurarAjudaHandler procuraAjuda = new ProcurarAjudaHandler((Migrante) this.u,
 				this.catRegioes,this.catAjudas,this.pluginsSms,this.io);
-		procuraAjuda.localizacao();
+		procuraAjuda.escolheRegiao();
 		procuraAjuda.escolheAjudas();
 		procuraAjuda.confirma();
 		

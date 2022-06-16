@@ -3,7 +3,6 @@ package tests;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,10 +12,7 @@ import ajuda.Ajuda;
 import ajuda.Alojamento;
 import ajuda.CatalogoAjudas;
 import ajuda.Item;
-import ajuda.sms.EnviadoresSMS;
-import handlers.ProcurarAjudaHandler;
 import handlers.RegistaMigranteHandler;
-import io.InputOutput;
 import pedido_ajuda.PedidoAjuda;
 import regiao.CatalogoRegioes;
 import regiao.Regiao;
@@ -45,7 +41,7 @@ class Tests {
 		Regiao lisboa = new Regiao("Lisboa");
 		Ajuda aloj1 = new Alojamento(4, lisboa, v);
 		Ajuda item1 = new Item("brinquedo",v);
-		CatalogoAjudas catA = new CatalogoAjudas();
+		CatalogoAjudas catA = new CatalogoAjudas(null);
 		catA.adicionaAjuda(aloj1);
 		catA.adicionaAjuda(item1);
 		assertEquals(aloj1, catA.getAjuda(aloj1.getNome()));
@@ -63,7 +59,7 @@ class Tests {
 		Ajuda item1 = new Item("brinquedo1",v);
 		Ajuda item2 = new Item("brinquedo2",v);
 		Ajuda item3 = new Item("brinquedo3",v);
-		CatalogoAjudas catA = new CatalogoAjudas();
+		CatalogoAjudas catA = new CatalogoAjudas(null);
 		Migrante migrante = new Migrante(nomeMigrante1, telMigrante1);
 		
 		catA.adicionaAjuda(aloj1);
@@ -138,16 +134,6 @@ class Tests {
 			assertEquals(lista_de_testes.get(i), lista_do_catalogo.get(i));
 		}
 	} 
-//	
-//	@Test
-//	void registarProcurar() {
-//		
-//	}
-//	
-//	@Test
-//	void registarVoluntarioOp() {
-//		
-//	}
 	
 }
 
