@@ -53,8 +53,8 @@ public class RegistarAjudaHandler {
 				break;
 				
 			case "item" :
-				this.io.pergunta("\nIndique a descrição do item a ser oferecido:");
-				criaItem(this.io.recebe());
+				
+				criaItem(this.io.pergunta("\nIndique a descrição do item a ser oferecido:"));
 				break;
 				
 			default :

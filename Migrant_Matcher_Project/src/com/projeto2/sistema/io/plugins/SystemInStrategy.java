@@ -73,4 +73,9 @@ public class SystemInStrategy implements InputOutput {
 		}
 	}
 
+	@Override
+	public void sair() {
+		this.sc.close();	
+	}
+
 }

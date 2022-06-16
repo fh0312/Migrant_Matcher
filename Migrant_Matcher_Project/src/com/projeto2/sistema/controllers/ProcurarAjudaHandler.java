@@ -30,6 +30,7 @@ public class ProcurarAjudaHandler {
 		this.pluginsSms=plugins;
 	}
 	
+	
 	public void escolheRegiao() {
 		while (this.r == null) {
 			this.r = catRegioes.getRegiao(this.io.pergunta("\nPara onde se deseja mover?\n"

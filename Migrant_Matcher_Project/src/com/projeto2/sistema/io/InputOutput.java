@@ -8,5 +8,6 @@ public interface InputOutput {
 		public int getInt();
 		public int getTel(String deAlguem);
 		public String recebe();
+		public void sair();
 		
 }

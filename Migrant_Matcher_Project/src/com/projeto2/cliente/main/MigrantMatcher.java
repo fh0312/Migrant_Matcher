@@ -71,7 +71,10 @@ public class MigrantMatcher {
 			this.io.escreve("\n\n");
 			iniciaSistema();
 		}
-		else this.io.escreve("\n\nObrigado por utilizar o nosso sistema !\n");
+		else {
+			this.io.escreve("\n\nObrigado por utilizar o nosso sistema !\n");
+			this.io.sair();
+		}
 	}
 	
 	private void pedirAjuda() throws NumberFormatException {

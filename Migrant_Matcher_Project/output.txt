@@ -1,0 +1,251 @@
+
+	BEM VINDO AO PROGRAMA MIGRANT MATCHER!
+
+ - Para procurar uma ajuda:	 escreva migrante
+ - Para fazer uma doação:	 escreva voluntario
+ - Para sair do programa:	 escreva sair
+
+	-> voluntario
+
+Indique o número de telémovel :
+
+	-> 999999999
+
+Indique o tipo de ajuda que deseja fornecer:
+Tipos de Ajuda Disponiveis: | ALOJAMENTO | ITEM | 
+	-> alojamento
+
+Indique o número máximo de ocupação do alojamento:
+	-> 4
+
+Escolha uma região das seguintes apresentadas:
+	PORTO
+	VISEU
+	BRAGA
+	AVEIRO
+	SANTAREM
+	SETUBAL
+	LISBOA
+	LEIRIA
+	FARO
+	COIMBRA
+	MADEIRA
+	ACORES
+
+
+	-> lisboa
+Deseja confirmar a sua doação?
+	-> sim
+Indique o código que lhe foi enviado por sms:
+	-> 123456
+Deseja efetuar mais operações ?
+	-> sim
+
+
+ - Para procurar uma ajuda:	 escreva migrante
+ - Para fazer uma doação:	 escreva voluntario
+ - Para sair do programa:	 escreva sair
+
+	-> voluntario
+
+Indique o número de telémovel :
+
+	-> 999999999
+
+Indique o tipo de ajuda que deseja fornecer:
+Tipos de Ajuda Disponiveis: | ALOJAMENTO | ITEM | 
+	-> alojamento
+
+Indique o número máximo de ocupação do alojamento:
+	-> 2
+
+Escolha uma região das seguintes apresentadas:
+	PORTO
+	VISEU
+	BRAGA
+	AVEIRO
+	SANTAREM
+	SETUBAL
+	LISBOA
+	LEIRIA
+	FARO
+	COIMBRA
+	MADEIRA
+	ACORES
+
+
+	-> lisboa
+Deseja confirmar a sua doação?
+	-> sim
+Indique o código que lhe foi enviado por sms:
+	-> 123456
+Deseja efetuar mais operações ?
+	-> sim
+
+
+ - Para procurar uma ajuda:	 escreva migrante
+ - Para fazer uma doação:	 escreva voluntario
+ - Para sair do programa:	 escreva sair
+
+	-> voluntario
+
+Indique o número de telémovel :
+
+	-> 999999999
+
+Indique o tipo de ajuda que deseja fornecer:
+Tipos de Ajuda Disponiveis: | ALOJAMENTO | ITEM | 
+	-> item
+
+Indique a descrição do item a ser oferecido:
+	-> brinquedo
+Deseja confirmar a sua doação?
+	-> sim
+Indique o código que lhe foi enviado por sms:
+	-> 123456
+Deseja efetuar mais operações ?
+	-> sim
+
+
+ - Para procurar uma ajuda:	 escreva migrante
+ - Para fazer uma doação:	 escreva voluntario
+ - Para sair do programa:	 escreva sair
+
+	-> migrante
+ - Para se inscrever individualmente:	 indique o seu numero de telemovel
+ - Para inscrever a sua familia:	 indique o numero de pessoas do seu agregado familiar
+
+	-> 930000000
+Indique o seu nome :
+
+	-> Augusto
+
+Para onde se deseja mover?
+	PORTO
+	VISEU
+	BRAGA
+	AVEIRO
+	SANTAREM
+	SETUBAL
+	LISBOA
+	LEIRIA
+	FARO
+	COIMBRA
+	MADEIRA
+	ACORES
+
+	-> Lisboa
+Indique o método de ordenação para a lista de ajudas da regiao indicada, tipo ou data:
+	-> data
+
+Lista de Ajudas Disponiveis:
+0 - ALOJAMENTO PARA 4 PESSOAS NA REGIÃO DE LISBOA
+1 - ALOJAMENTO PARA 2 PESSOAS NA REGIÃO DE LISBOA
+2 - ITEM: BRINQUEDO
+
+
+Indique o número da ajuda desejada:
+	-> 0
+Deseja adionar mais ajudas?
+	-> nao
+
+Deseja confirmar o seu pedido ?
+	-> sim
+Deseja efetuar mais operações ?
+	-> sim
+
+
+ - Para procurar uma ajuda:	 escreva migrante
+ - Para fazer uma doação:	 escreva voluntario
+ - Para sair do programa:	 escreva sair
+
+	-> migrante
+ - Para se inscrever individualmente:	 indique o seu numero de telemovel
+ - Para inscrever a sua familia:	 indique o numero de pessoas do seu agregado familiar
+
+	-> 930000001
+Indique o seu nome :
+
+	-> Pedro
+
+Para onde se deseja mover?
+	PORTO
+	VISEU
+	BRAGA
+	AVEIRO
+	SANTAREM
+	SETUBAL
+	LISBOA
+	LEIRIA
+	FARO
+	COIMBRA
+	MADEIRA
+	ACORES
+
+	-> Lisboa
+Indique o método de ordenação para a lista de ajudas da regiao indicada, tipo ou data:
+	-> tipo
+
+Lista de Ajudas Disponiveis:
+0 - ALOJAMENTO PARA 2 PESSOAS NA REGIÃO DE LISBOA
+1 - ITEM: BRINQUEDO
+
+
+Indique o número da ajuda desejada:
+	-> 0
+Deseja adionar mais ajudas?
+	-> nao
+
+Deseja confirmar o seu pedido ?
+	-> sim
+Deseja efetuar mais operações ?
+	-> sim
+
+
+ - Para procurar uma ajuda:	 escreva migrante
+ - Para fazer uma doação:	 escreva voluntario
+ - Para sair do programa:	 escreva sair
+
+	-> migrante
+ - Para se inscrever individualmente:	 indique o seu numero de telemovel
+ - Para inscrever a sua familia:	 indique o numero de pessoas do seu agregado familiar
+
+	-> 930000002
+Indique o seu nome :
+
+	-> Joao
+
+Para onde se deseja mover?
+	PORTO
+	VISEU
+	BRAGA
+	AVEIRO
+	SANTAREM
+	SETUBAL
+	LISBOA
+	LEIRIA
+	FARO
+	COIMBRA
+	MADEIRA
+	ACORES
+
+	-> Lisboa
+Indique o método de ordenação para a lista de ajudas da regiao indicada, tipo ou data:
+	-> tipo
+
+Lista de Ajudas Disponiveis:
+0 - ITEM: BRINQUEDO
+
+
+Indique o número da ajuda desejada:
+	-> 0
+Deseja adionar mais ajudas?
+	-> nao
+
+Deseja confirmar o seu pedido ?
+	-> sim
+Deseja efetuar mais operações ?
+	-> nao
+
+
+Obrigado por utilizar o nosso sistema !

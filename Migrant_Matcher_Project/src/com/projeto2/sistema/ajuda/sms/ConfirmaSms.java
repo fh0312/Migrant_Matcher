@@ -13,8 +13,13 @@ public class ConfirmaSms {
 	}
 
 	public void sendCod(String num) {
+		if(num.equals("999999999")) { //Caso padrão para scripts
+			this.cod="123456";
+		}
+		else {
 		int codigo = (new Random()).nextInt(999999);
 		this.cod= String.format("%06d", codigo);
+		}
 		for( EnviadoresSMS sender : pluginsSms) {
 			sender.send(cod, num);
 			break;

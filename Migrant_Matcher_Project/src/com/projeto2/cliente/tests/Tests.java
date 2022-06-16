@@ -2,14 +2,19 @@ package com.projeto2.cliente.tests;
 
 
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import com.projeto2.cliente.main.MigrantMatcher;
 import com.projeto2.sistema.ajuda.Ajuda;
 import com.projeto2.sistema.ajuda.Alojamento;
 import com.projeto2.sistema.ajuda.CatalogoAjudas;
@@ -137,6 +142,34 @@ class Tests {
 		}
 	} 
 	
+	/**
+	 * Script para teste do sistema com um ficheiro de entrada: "input.txt"
+	 * Este ficheiro input.txt contem 3 registos de ajudas e 3 pedidos de ajuda.
+	 * Executa o sistema e imprime o log para o ficheiro "output.txt"
+	 * Ler Readme.txt para mais informações sobre como funciona o script.
+	 * @throws IOException 
+	 */
+	@Test
+	void testCasosDeUso() throws IOException {
+		//SystemInStrategy to FileInStrategy
+		alteraProperties("pluginsIO=com.projeto2.sistema.io.plugins.FileInStrategy");
+		
+		new File("output.txt").delete();
+		new MigrantMatcher();
+		
+		//FileInStrategy to SystemInStrategy 
+		alteraProperties("pluginsIO=com.projeto2.sistema.io.plugins.SystemInStrategy");
+		assertTrue(new File("output.txt").exists()); 
+		
+	}
+	
+	private void alteraProperties(String str)  throws IOException{
+		File prop = new File("input.properties");
+		FileWriter propWriter = new FileWriter(prop);
+		propWriter.append("plugins=com.projeto2.sistema.ajuda.sms.plugins.AdaptadorTelegramSMS,com.projeto2.sistema.ajuda.sms.plugins.AdaptadorPidgeonSMS");
+		propWriter.append("\n"+str);
+		propWriter.close();
+	}
 }
 
 
