@@ -1,4 +1,4 @@
-package com.projeto2.sistema.handlers.criaAjuda;
+package com.projeto2.sistema.controllers.criaAjuda;
 
 import com.projeto2.sistema.ajuda.Ajuda;
 import com.projeto2.sistema.ajuda.Alojamento;

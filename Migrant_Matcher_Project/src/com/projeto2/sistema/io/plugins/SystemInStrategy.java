@@ -14,22 +14,31 @@ public class SystemInStrategy implements InputOutput {
 
 	@Override
 	public String pergunta(String pergunta) {
+		this.sc = new Scanner(System.in);
 		System.out.println(pergunta);
 		System.out.print("\t-> ");
-		return sc.next();
+		String resposta="";
+        resposta += sc.nextLine();
+		return resposta;
 	}
 
 	@Override
 	public String getNome(String pronome, String deAlguem) {
+		this.sc = new Scanner(System.in);
 		System.out.println("Indique o " + pronome + "nome " + deAlguem + ":");
 		System.out.print("\n\t-> ");
-		return sc.next();
+		String resposta="";
+        resposta += sc.nextLine();
+		return resposta;
 	}
 
 	@Override
 	public int getInt() {
+		this.sc = new Scanner(System.in);
 		try {
-			return Integer.parseInt(sc.next());
+			String resposta="";
+	        resposta += sc.next();
+			return Integer.parseInt(resposta);
 		}
 		catch(NumberFormatException e) {
 			escreve("O número introduzido não é válido.\n"
@@ -44,7 +53,9 @@ public class SystemInStrategy implements InputOutput {
 	}
 	@Override
 	public String recebe() {
-		return sc.next();
+		String resposta="";
+        resposta += sc.nextLine();
+		return resposta;
 	}
 
 	@Override
@@ -52,7 +63,9 @@ public class SystemInStrategy implements InputOutput {
 		try {
 			System.out.println("\nIndique o número de telémovel " + deAlguem + ":");
 			System.out.print("\n\t-> ");
-			return Integer.parseInt(sc.next());
+			String resposta="";
+	        resposta += sc.next();
+			return Integer.parseInt(resposta);
 		}
 		catch (NumberFormatException e) {
 			System.out.println("Número de telemovel inválido. \nPor favor tente novamente...");

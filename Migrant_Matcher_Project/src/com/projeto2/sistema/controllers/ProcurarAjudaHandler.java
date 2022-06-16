@@ -1,4 +1,4 @@
-package com.projeto2.sistema.handlers;
+package com.projeto2.sistema.controllers;
 
 import java.util.List;
 
@@ -43,18 +43,24 @@ public class ProcurarAjudaHandler {
 		String ordem = this.io.pergunta("Indique o método de ordenação para a lista de "
 				+ "ajudas da regiao indicada, tipo ou data:");
 		List<Ajuda> list = this.catAjudas.getAjudasPorOrdem(ordem,this.r);
-		if (list.isEmpty()) { //Extensao 5a
+		if(list==null) {
+			this.io.escreve("Tipo de ordenação inválido!\nPorfavor tente novamente...\n\n");
+			escolheAjudas();
+		}
+		else if (list.isEmpty()) { 
 			this.io.escreve("Ainda não existem ajudas nessa região.\n"
 					+ "Iremos notifica-lo assim que existir alguma ajuda.\n");
 			this.catAjudas.registaObserver(new ObservaAjudas(migrante, r));
 		}
 		else {
-			this.io.escreve(this.catAjudas.imprimeAjudasPorOrdem(this.catAjudas.getAjudasPorOrdem(ordem,this.r))+"\n");	
+			this.io.escreve(this.catAjudas.imprimeAjudasPorOrdem(this.catAjudas.
+					getAjudasPorOrdem(ordem,this.r))+"\n");	
 			this.migrante.setPaCorrente(new PedidoAjuda(this.catAjudas));
 			do {
 				this.migrante.getPaCorrente().adicionaAjuda(getAjudaInidicada(ordem));
 			}
-			while(((this.io.pergunta("Deseja adionar mais ajudas?").toLowerCase().split("\\s"))[0]).equals("sim"));
+			while(((this.io.pergunta("Deseja adionar mais ajudas?").toLowerCase().
+					split("\\s"))[0]).equals("sim"));
 		}
 	}
 
@@ -62,7 +68,7 @@ public class ProcurarAjudaHandler {
 		
 		try {
 			int num = Integer.parseInt(this.io.pergunta("\nIndique o número da ajuda desejada:"));
-			if(num>=this.catAjudas.getAjudasPorOrdem(ordem,this.r).size()-1) {
+			if(num>this.catAjudas.getAjudasPorOrdem(ordem,this.r).size()-1) {
 				this.io.escreve("\nNúmero inválido!\nPor favor tente novamente...\n\n\n");
 				return getAjudaInidicada(ordem);
 			}
@@ -79,7 +85,8 @@ public class ProcurarAjudaHandler {
 	}
 
 	public void confirma() {
-		if(((this.io.pergunta("\nDeseja confirmar o seu pedido ?").toLowerCase().split("\\s"))[0]).equals("sim") && 
+		if(((this.io.pergunta("\nDeseja confirmar o seu pedido ?").toLowerCase().
+				split("\\s"))[0]).equals("sim") && 
 				this.migrante.getPaCorrente() != null) {
 			this.migrante.getPaCorrente().confirmaPedido();
 			this.migrante.adicionaPedido(this.migrante.getPaCorrente());

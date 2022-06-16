@@ -6,9 +6,9 @@ import java.util.List;
 import com.projeto2.sistema.ajuda.CatalogoAjudas;
 import com.projeto2.sistema.ajuda.sms.EnviadoresSMS;
 import com.projeto2.sistema.configuration.MinhaConfig;
-import com.projeto2.sistema.handlers.ProcurarAjudaHandler;
-import com.projeto2.sistema.handlers.RegistaMigranteHandler;
-import com.projeto2.sistema.handlers.RegistarAjudaHandler;
+import com.projeto2.sistema.controllers.ProcurarAjudaHandler;
+import com.projeto2.sistema.controllers.RegistaMigranteHandler;
+import com.projeto2.sistema.controllers.RegistarAjudaHandler;
 import com.projeto2.sistema.io.InputOutput;
 import com.projeto2.sistema.regiao.CatalogoRegioes;
 import com.projeto2.sistema.utilizador.CatalogoUtilizadores;
@@ -77,9 +77,14 @@ public class MigrantMatcher {
 	private void pedirAjuda() throws NumberFormatException {
 		RegistaMigranteHandler registo = new RegistaMigranteHandler(this.io);
 		try{
-			registo.iniciaRegisto();
-			this.u = registo.getMigrante();
-			this.catUsers.adicionaUser(u);
+			int tel = registo.iniciaRegisto();
+			if(this.catUsers.getUser(tel)==null) {
+				registo.continuaRegisto(tel);
+				this.u = registo.getMigrante();
+				this.catUsers.adicionaUser(u);
+			}
+			else this.u = this.catUsers.getUser(tel);
+
 		}
 		catch(NumberFormatException e) {
 			this.io.escreve(" Número de telemovel inválido! \nPor favor tente novamente...\n\n");

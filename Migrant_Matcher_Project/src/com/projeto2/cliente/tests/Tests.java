@@ -14,7 +14,7 @@ import com.projeto2.sistema.ajuda.Ajuda;
 import com.projeto2.sistema.ajuda.Alojamento;
 import com.projeto2.sistema.ajuda.CatalogoAjudas;
 import com.projeto2.sistema.ajuda.Item;
-import com.projeto2.sistema.handlers.RegistaMigranteHandler;
+import com.projeto2.sistema.controllers.RegistaMigranteHandler;
 import com.projeto2.sistema.pedido_ajuda.PedidoAjuda;
 import com.projeto2.sistema.regiao.CatalogoRegioes;
 import com.projeto2.sistema.regiao.Regiao;

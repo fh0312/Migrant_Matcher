@@ -1,4 +1,4 @@
-package com.projeto2.sistema.handlers;
+package com.projeto2.sistema.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +17,15 @@ public class RegistaMigranteHandler {
 		this.io = io;
 	}
 
-	public void iniciaRegisto() throws NumberFormatException{
+	public int iniciaRegisto() throws NumberFormatException{
 		io.escreve(" - Para se inscrever individualmente:\t indique o seu numero de telemovel\n"
 				+ " - Para inscrever a sua familia:\t indique o numero de pessoas do seu agregado"
 				+ " familiar\n\n\t-> ");
 		int num =io.getInt();
-		
+		return num;
+	}
+	
+	public void continuaRegisto(int num) {
 		if(num>100) { // individual
 			this.nome= io.getNome("seu ","");
 			this.cabecaCasal= new Migrante(this.nome,num);

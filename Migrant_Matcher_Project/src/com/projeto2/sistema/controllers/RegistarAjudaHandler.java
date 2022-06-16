@@ -1,11 +1,11 @@
-package com.projeto2.sistema.handlers;
+package com.projeto2.sistema.controllers;
 
 import java.util.List;
 
 import com.projeto2.sistema.ajuda.CatalogoAjudas;
 import com.projeto2.sistema.ajuda.sms.ConfirmaSms;
 import com.projeto2.sistema.ajuda.sms.EnviadoresSMS;
-import com.projeto2.sistema.handlers.criaAjuda.CriaAjuda;
+import com.projeto2.sistema.controllers.criaAjuda.CriaAjuda;
 import com.projeto2.sistema.io.InputOutput;
 import com.projeto2.sistema.regiao.CatalogoRegioes;
 import com.projeto2.sistema.utilizador.Voluntario;

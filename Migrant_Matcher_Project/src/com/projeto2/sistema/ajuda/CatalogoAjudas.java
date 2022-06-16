@@ -1,7 +1,6 @@
 package com.projeto2.sistema.ajuda;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
@@ -72,7 +71,7 @@ public class CatalogoAjudas implements Observable {
 		else if(ordem.toLowerCase().contains("tipo"))
 			return new OrdenaPorTipoStrategy().ordena(this.getAjudasPorRegiao(r));
 		
-		return Arrays.asList();
+		return null;
 	}
 	
 	public List<Ajuda> getAjudasPorRegiao(Regiao r){
