@@ -44,5 +44,8 @@ public class MinhaConfig {
 		}
 		return defaul;
 	}
+          
+        //Código realizado em aula pelo professor Alcides da cadeira de DCO
+        //Apenas ligeiramente alterado.
 
 }
