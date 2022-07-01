@@ -30,10 +30,6 @@ class Tests {
 		CatalogoRegioes catR = new CatalogoRegioes();
 		catR.adicionaRegiao(r1);
 		catR.adicionaRegiao(r2);
-		for(Regiao r : catR.getRegioes()) {
-			System.out.println(r.getNome());
-		}
-		System.out.println("Regiao r2 = "+catR.getRegiao(r2.getNome()));
 		assertEquals(r1, catR.getRegiao(r1.getNome()));
 		assertEquals(r2, catR.getRegiao(r2.getNome()));
 	}
