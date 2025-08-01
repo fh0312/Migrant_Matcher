@@ -1,108 +1,106 @@
-# 🇵🇹 Versão em Português
-
-> 📘 A versão original em inglês deste README está disponível em [README.md](./README.md)
+> 📘 **English Version**  
+> This document is the English version of the original project README.  
+> Looking for the Portuguese version? [Click here 🇵🇹](./README.pt.md)
 
 ---
 
 # Migrant_Matcher
 
-## Projeto em java da UC de Desenvolvimento Centrado em Objetos da 
-### Faculdade de Ciencias da Universiadade de Lisboa.
+## Java project developed for the **Object-Centered Development** course unit  
+### Faculty of Sciences of the University of Lisbon
 
-## Descrição do projeto
+---
 
-### MigrantMatcher
-- A aplicação MigrantMatcher está a ser desenvolvida com o objectivo de facilitar a ajuda de migrantes em massa. Em situações de guerra, vulcões ou outras calamidades, esta aplicação irá ajudar a que os migrantes consigam receber ajuda (quer em items, quer em alojamento) de forma mais eficaz.
+## 📌 Project Description
 
+**MigrantMatcher** is an application designed to facilitate and streamline humanitarian aid for migrants in emergency situations such as war, natural disasters, or social crises. The application allows volunteers to offer help (in the form of housing or goods), and enables migrants to easily locate and request available assistance.
 
-# Autores:
+---
 
-Francisco Henriques - FC56348
-Manuel Cardoso - FC56274
+## 👥 Authors
 
-#----------------#------------------#-------------------------#--------------------#
+- Francisco Henriques - FC56348  
+- Manuel Cardoso - FC56274
 
-Migrant Matcher:
+---
 
-Para iniciar o MigrantMatcher correr a classe Main.java e responder às perguntas feitas pelo sistema.
+## 🚀 How to Run MigrantMatcher
 
-Para utilização do Script da classe de Testes : casoDeUsoProcurarAjuda() 
+To launch the application, simply run the `Main.java` class and follow the instructions displayed in the terminal.
 
-	1º - O ficheiro input.txt já tem um script com 3 registos de ajuda e 3 procuras de ajuda.
-	2º - Ao correr o script, o sistema fará o scan do ficheiro "input.txt" por isso:
-		- Cada linha desse ficheiro "input.txt" tem o seguinte formato:
-			
-			//CASO DE USO : REGISTAR AJUDA
-				-voluntario
-				-999999999 //telemovel para scripts
-				-(tipo de ajuda)
-				-(numero de pessoas que alberga || descricao do item)
-				-(regiao)
-				-sim //sim desejo confirmar a doacao
-				-123456 //codigo para scripts
-				-nao //nao desejo mais operacoes
+### Running the test script: `casoDeUsoProcurarAjuda()`
 
-			//CASO DE USO : PROCURAR AJUDA
-				-migrante
-				-(inserir nº de telemovel)
-				-(inserir nome)
-				-(inserir regiao para onde se vai mudar)
-				-(inserir tipo de ordenacao das ajudas - tipo ou data)
-				-0 // primeira ajuda da lista caso já tenha sido adionada alguma.
-				-nao	//nao desejo adicionar mais ajudas
-				-sim  //sim desejo confirmar a reserva
-				-nao	//nao desejo mais operacoes	
-        
-        3º - O resultado do Script estará no ficheiro "output.txt"
-	
-	
+1. The `input.txt` file is already prepared with:
+   - 3 help offers
+   - 3 help requests
 
-## Casos de uso:
+2. When the script is executed, the application will automatically scan the `input.txt` file, which must follow the structured command format below:
 
-### Caso de Uso 1: Registar ajuda
-Este caso de uso permite a voluntários disponibilizar um tipo de ajuda na plataforma.
+#### Expected format for `input.txt`:
 
-Descrição do Caso de Uso:
+##### Use Case: Register Help
+```
+-volunteer
+-999999999              // Volunteer’s phone number
+-(type of help)
+-(number of people it hosts OR item description)
+-(region)
+-yes                    // Confirm donation
+-123456                 // Confirmation code
+-no                     // End operation
+```
 
-O voluntário identifica-se com o seu contacto telefónico.
-O sistema pede ao voluntário para indicar o tipo de ajuda que pretende oferecer.
-No caso de o voluntário pretender oferecer um alojamento,
-O voluntário indicando o número de pessoas que esse alojamento alberga.
-O sistema devolve a lista de regiões no país.
-O voluntário indica a região onde se encontra o alojamento.
-No caso de o voluntário pretender oferecer um item (por exemplo, colchões, roupas, brinquedos),
-O voluntário indica a descrição do item.
-Em qualquer dos casos, o sistema envia uma notificação por SMS para o voluntário com um código único.
-O utilizador indica ao sistema o código único para confirmar a oferta de ajuda.
+##### Use Case: Search for Help
+```
+-migrant
+-(phone number)
+-(name)
+-(region you’re moving to)
+-(type of sorting: type or date)
+-0                      // Select help
+-no                     // Don’t add more help
+-yes                    // Confirm reservation
+-no                     // End operation
+```
 
+3. The result of the script execution will be written to the `output.txt` file.
 
-### Caso de Uso 2: Procurar Ajuda
-Este caso de uso permite a migrantes procurar e aceitar ajudas oferecidas.
+---
 
-Descrição do Caso de Uso:
+## 📚 Use Cases
 
-Alternativamente,
-O migrante indica que pretende registar-se individualmente, indicando o seu nome e número de telefone. 
-Ou indica que pretende registar a sua família, indicando o número de pessoas.
-Nesse caso, o sistema pergunta o nome e contacto do cabeça de casal.
-O migrante indica o nome e contacto correspondente.
-O sistema pergunta os dados de outro membro da família.
-O migrante indica o nome do outro membro.
-Os dois últimos passos podem ser repetidos enquanto o migrante entender.
-De seguida, o migrante pede a lista de regiões para onde se poderá mover.
-O sistema devolve a lista de regiões no país.
-O migrante indica a região para onde se vai mover.
-O sistema devolve uma lista de ajudas possíveis (tanto alojamentos nessa região, como items).
-O migrante escolhe a ajuda de que pretende usufruir de entre dessas listadas.
-O sistema regista esta informação.
-Os dois passos anteriores podem ser repetidos tantas vezes quantas o migrante necessitar.
-Finalmente, o migrante indica que pretende confirmar.
-O sistema regista a atribuição de ajudas a esse migrante, e envia uma SMS aos voluntários que ofereceram as respectivas ajudas.
+### 1️⃣ Register Help
 
-### Extensão 5a:
+Allows volunteers to offer accommodations or items to migrants.
 
-5. O Sistema indica que não existe nenhuma ajuda nessa região.
-6. O migrante indica que pretende ser notificado quando existir nessa região.
+**Steps:**
+- The volunteer identifies themselves using their phone number.
+- Chooses the type of help (accommodation or item).
+- If accommodation: indicates the number of people it can host and the region.
+- If item: provides a description of the item and the region.
+- The system sends a confirmation code via SMS.
+- The volunteer enters the code and confirms the offer.
 
+---
 
+### 2️⃣ Search for Help
 
+Allows migrants to search for and reserve available assistance.
+
+**Steps:**
+- Migrant can register individually or with a family.
+- Provides name and phone number (or head of household + members).
+- Chooses the region they plan to move to.
+- Views the list of available help (sorted by type or date).
+- Selects the desired help.
+- Confirms the reservation.
+- The system notifies the corresponding volunteers via SMS.
+
+---
+
+### 🧩 Extension 5a
+
+- If there’s no help available in the chosen region, the system notifies the user.
+- The migrant can choose to be notified when help becomes available in that region.
+
+---
