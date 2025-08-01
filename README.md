@@ -1,6 +1,6 @@
 > 📘 **English Version**  
 > This document is the English version of the original project README.  
-> Looking for the Portuguese version? [Click here 🇵🇹](./README.pt.md)
+> Looking for the Portuguese version? [Click here 🇵🇹](./Readme.pt.md)
 
 ---
 
